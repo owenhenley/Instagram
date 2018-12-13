@@ -7,25 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3E35F68421C1DE4900BAEA53 /* DELETEME-MODEL in Resources */ = {isa = PBXBuildFile; fileRef = 3E35F68321C1DE4900BAEA53 /* DELETEME-MODEL */; };
-		3E35F68821C1DE4900BAEA53 /* DELETEME-MODELCONTROLLER in Resources */ = {isa = PBXBuildFile; fileRef = 3E35F68721C1DE4900BAEA53 /* DELETEME-MODELCONTROLLER */; };
-		3E35F68B21C1DE4900BAEA53 /* DELETEME-VIEWCONTROLLER in Resources */ = {isa = PBXBuildFile; fileRef = 3E35F68A21C1DE4900BAEA53 /* DELETEME-VIEWCONTROLLER */; };
-		3E35F69021C1DE4900BAEA53 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E35F68E21C1DE4900BAEA53 /* Main.storyboard */; };
+		3E35F69021C1DE4900BAEA53 /* Timeline.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E35F68E21C1DE4900BAEA53 /* Timeline.storyboard */; };
 		3E35F69321C1DE4900BAEA53 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E35F69221C1DE4900BAEA53 /* AppDelegate.swift */; };
 		3E35F69521C1DE4B00BAEA53 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E35F69421C1DE4B00BAEA53 /* Assets.xcassets */; };
 		3E35F69821C1DE4B00BAEA53 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E35F69621C1DE4B00BAEA53 /* LaunchScreen.storyboard */; };
+		3E35F6A221C1DE7500BAEA53 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E35F6A121C1DE7500BAEA53 /* CloudKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3E35F67F21C1DE4900BAEA53 /* insta-clone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "insta-clone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3E35F68321C1DE4900BAEA53 /* DELETEME-MODEL */ = {isa = PBXFileReference; lastKnownFileType = text; path = "DELETEME-MODEL"; sourceTree = "<group>"; };
-		3E35F68721C1DE4900BAEA53 /* DELETEME-MODELCONTROLLER */ = {isa = PBXFileReference; lastKnownFileType = text; path = "DELETEME-MODELCONTROLLER"; sourceTree = "<group>"; };
-		3E35F68A21C1DE4900BAEA53 /* DELETEME-VIEWCONTROLLER */ = {isa = PBXFileReference; lastKnownFileType = text; path = "DELETEME-VIEWCONTROLLER"; sourceTree = "<group>"; };
-		3E35F68F21C1DE4900BAEA53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3E35F68F21C1DE4900BAEA53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Timeline.storyboard; sourceTree = "<group>"; };
 		3E35F69221C1DE4900BAEA53 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3E35F69421C1DE4B00BAEA53 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3E35F69721C1DE4B00BAEA53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3E35F69921C1DE4B00BAEA53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3E35F69F21C1DE7000BAEA53 /* insta-clone.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "insta-clone.entitlements"; sourceTree = "<group>"; };
+		3E35F6A121C1DE7500BAEA53 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +30,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E35F6A221C1DE7500BAEA53 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +42,7 @@
 			children = (
 				3E35F68121C1DE4900BAEA53 /* insta-clone */,
 				3E35F68021C1DE4900BAEA53 /* Products */,
+				3E35F6A021C1DE7500BAEA53 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,9 +57,7 @@
 		3E35F68121C1DE4900BAEA53 /* insta-clone */ = {
 			isa = PBXGroup;
 			children = (
-				3E35F69421C1DE4B00BAEA53 /* Assets.xcassets */,
-				3E35F69621C1DE4B00BAEA53 /* LaunchScreen.storyboard */,
-				3E35F69921C1DE4B00BAEA53 /* Info.plist */,
+				3E35F69F21C1DE7000BAEA53 /* insta-clone.entitlements */,
 				3E35F68221C1DE4900BAEA53 /* Models */,
 				3E35F68521C1DE4900BAEA53 /* Controllers */,
 				3E35F68C21C1DE4900BAEA53 /* Views */,
@@ -72,7 +69,6 @@
 		3E35F68221C1DE4900BAEA53 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				3E35F68321C1DE4900BAEA53 /* DELETEME-MODEL */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -89,7 +85,6 @@
 		3E35F68621C1DE4900BAEA53 /* Model Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				3E35F68721C1DE4900BAEA53 /* DELETEME-MODELCONTROLLER */,
 			);
 			name = "Model Controllers";
 			sourceTree = "<group>";
@@ -97,7 +92,6 @@
 		3E35F68921C1DE4900BAEA53 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				3E35F68A21C1DE4900BAEA53 /* DELETEME-VIEWCONTROLLER */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -113,7 +107,8 @@
 		3E35F68D21C1DE4900BAEA53 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				3E35F68E21C1DE4900BAEA53 /* Main.storyboard */,
+				3E35F69621C1DE4B00BAEA53 /* LaunchScreen.storyboard */,
+				3E35F68E21C1DE4900BAEA53 /* Timeline.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -121,9 +116,19 @@
 		3E35F69121C1DE4900BAEA53 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3E35F69921C1DE4B00BAEA53 /* Info.plist */,
+				3E35F69421C1DE4B00BAEA53 /* Assets.xcassets */,
 				3E35F69221C1DE4900BAEA53 /* AppDelegate.swift */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		3E35F6A021C1DE7500BAEA53 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3E35F6A121C1DE7500BAEA53 /* CloudKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -158,6 +163,14 @@
 				TargetAttributes = {
 					3E35F67E21C1DE4900BAEA53 = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -184,11 +197,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E35F68B21C1DE4900BAEA53 /* DELETEME-VIEWCONTROLLER in Resources */,
-				3E35F68421C1DE4900BAEA53 /* DELETEME-MODEL in Resources */,
-				3E35F68821C1DE4900BAEA53 /* DELETEME-MODELCONTROLLER in Resources */,
 				3E35F69821C1DE4B00BAEA53 /* LaunchScreen.storyboard in Resources */,
-				3E35F69021C1DE4900BAEA53 /* Main.storyboard in Resources */,
+				3E35F69021C1DE4900BAEA53 /* Timeline.storyboard in Resources */,
 				3E35F69521C1DE4B00BAEA53 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -207,12 +217,12 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		3E35F68E21C1DE4900BAEA53 /* Main.storyboard */ = {
+		3E35F68E21C1DE4900BAEA53 /* Timeline.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				3E35F68F21C1DE4900BAEA53 /* Base */,
 			);
-			name = Main.storyboard;
+			name = Timeline.storyboard;
 			sourceTree = "<group>";
 		};
 		3E35F69621C1DE4B00BAEA53 /* LaunchScreen.storyboard */ = {
@@ -346,6 +356,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "insta-clone/insta-clone.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CYZA2EE6W8;
 				INFOPLIST_FILE = "insta-clone/Info.plist";
@@ -364,6 +375,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "insta-clone/insta-clone.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CYZA2EE6W8;
 				INFOPLIST_FILE = "insta-clone/Info.plist";
