@@ -7,174 +7,161 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3E35F69021C1DE4900BAEA53 /* Timeline.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E35F68E21C1DE4900BAEA53 /* Timeline.storyboard */; };
-		3E35F69321C1DE4900BAEA53 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E35F69221C1DE4900BAEA53 /* AppDelegate.swift */; };
-		3E35F69521C1DE4B00BAEA53 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E35F69421C1DE4B00BAEA53 /* Assets.xcassets */; };
-		3E35F69821C1DE4B00BAEA53 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E35F69621C1DE4B00BAEA53 /* LaunchScreen.storyboard */; };
-		3E35F6A221C1DE7500BAEA53 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E35F6A121C1DE7500BAEA53 /* CloudKit.framework */; };
+		3E820E35221CA51D008124DB /* DELETEME-MODEL in Resources */ = {isa = PBXBuildFile; fileRef = 3E820E34221CA51D008124DB /* DELETEME-MODEL */; };
+		3E820E39221CA51D008124DB /* DELETEME-MODELCONTROLLER in Resources */ = {isa = PBXBuildFile; fileRef = 3E820E38221CA51D008124DB /* DELETEME-MODELCONTROLLER */; };
+		3E820E3C221CA51D008124DB /* DELETEME-VIEWCONTROLLER in Resources */ = {isa = PBXBuildFile; fileRef = 3E820E3B221CA51D008124DB /* DELETEME-VIEWCONTROLLER */; };
+		3E820E41221CA51D008124DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E820E3F221CA51D008124DB /* Main.storyboard */; };
+		3E820E44221CA51D008124DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E820E43221CA51D008124DB /* AppDelegate.swift */; };
+		3E820E46221CA51F008124DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E820E45221CA51F008124DB /* Assets.xcassets */; };
+		3E820E49221CA51F008124DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E820E47221CA51F008124DB /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3E35F67F21C1DE4900BAEA53 /* insta-clone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "insta-clone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3E35F68F21C1DE4900BAEA53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Timeline.storyboard; sourceTree = "<group>"; };
-		3E35F69221C1DE4900BAEA53 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3E35F69421C1DE4B00BAEA53 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		3E35F69721C1DE4B00BAEA53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		3E35F69921C1DE4B00BAEA53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3E35F69F21C1DE7000BAEA53 /* insta-clone.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "insta-clone.entitlements"; sourceTree = "<group>"; };
-		3E35F6A121C1DE7500BAEA53 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		3E820E30221CA51D008124DB /* Instagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E820E34221CA51D008124DB /* DELETEME-MODEL */ = {isa = PBXFileReference; lastKnownFileType = text; path = "DELETEME-MODEL"; sourceTree = "<group>"; };
+		3E820E38221CA51D008124DB /* DELETEME-MODELCONTROLLER */ = {isa = PBXFileReference; lastKnownFileType = text; path = "DELETEME-MODELCONTROLLER"; sourceTree = "<group>"; };
+		3E820E3B221CA51D008124DB /* DELETEME-VIEWCONTROLLER */ = {isa = PBXFileReference; lastKnownFileType = text; path = "DELETEME-VIEWCONTROLLER"; sourceTree = "<group>"; };
+		3E820E40221CA51D008124DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3E820E43221CA51D008124DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		3E820E45221CA51F008124DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3E820E48221CA51F008124DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		3E820E4A221CA51F008124DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		3E35F67C21C1DE4900BAEA53 /* Frameworks */ = {
+		3E820E2D221CA51D008124DB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E35F6A221C1DE7500BAEA53 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3E35F67621C1DE4900BAEA53 = {
+		3E820E27221CA51D008124DB = {
 			isa = PBXGroup;
 			children = (
-				3E35F68121C1DE4900BAEA53 /* insta-clone */,
-				3E35F68021C1DE4900BAEA53 /* Products */,
-				3E35F6A021C1DE7500BAEA53 /* Frameworks */,
+				3E820E32221CA51D008124DB /* Instagram */,
+				3E820E31221CA51D008124DB /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		3E35F68021C1DE4900BAEA53 /* Products */ = {
+		3E820E31221CA51D008124DB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3E35F67F21C1DE4900BAEA53 /* insta-clone.app */,
+				3E820E30221CA51D008124DB /* Instagram.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		3E35F68121C1DE4900BAEA53 /* insta-clone */ = {
+		3E820E32221CA51D008124DB /* Instagram */ = {
 			isa = PBXGroup;
 			children = (
-				3E35F69F21C1DE7000BAEA53 /* insta-clone.entitlements */,
-				3E35F68221C1DE4900BAEA53 /* Models */,
-				3E35F68521C1DE4900BAEA53 /* Controllers */,
-				3E35F68C21C1DE4900BAEA53 /* Views */,
-				3E35F69121C1DE4900BAEA53 /* Resources */,
+				3E820E45221CA51F008124DB /* Assets.xcassets */,
+				3E820E47221CA51F008124DB /* LaunchScreen.storyboard */,
+				3E820E4A221CA51F008124DB /* Info.plist */,
+				3E820E33221CA51D008124DB /* Models */,
+				3E820E36221CA51D008124DB /* Controllers */,
+				3E820E3D221CA51D008124DB /* Views */,
+				3E820E42221CA51D008124DB /* Resources */,
 			);
-			path = "insta-clone";
+			path = Instagram;
 			sourceTree = "<group>";
 		};
-		3E35F68221C1DE4900BAEA53 /* Models */ = {
+		3E820E33221CA51D008124DB /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				3E820E34221CA51D008124DB /* DELETEME-MODEL */,
 			);
 			name = Models;
 			sourceTree = "<group>";
 		};
-		3E35F68521C1DE4900BAEA53 /* Controllers */ = {
+		3E820E36221CA51D008124DB /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				3E35F68621C1DE4900BAEA53 /* Model Controllers */,
-				3E35F68921C1DE4900BAEA53 /* View Controllers */,
+				3E820E37221CA51D008124DB /* Model Controllers */,
+				3E820E3A221CA51D008124DB /* View Controllers */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
 		};
-		3E35F68621C1DE4900BAEA53 /* Model Controllers */ = {
+		3E820E37221CA51D008124DB /* Model Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				3E820E38221CA51D008124DB /* DELETEME-MODELCONTROLLER */,
 			);
 			name = "Model Controllers";
 			sourceTree = "<group>";
 		};
-		3E35F68921C1DE4900BAEA53 /* View Controllers */ = {
+		3E820E3A221CA51D008124DB /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				3E820E3B221CA51D008124DB /* DELETEME-VIEWCONTROLLER */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
 		};
-		3E35F68C21C1DE4900BAEA53 /* Views */ = {
+		3E820E3D221CA51D008124DB /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				3E35F68D21C1DE4900BAEA53 /* Storyboards */,
+				3E820E3E221CA51D008124DB /* Storyboards */,
 			);
 			name = Views;
 			sourceTree = "<group>";
 		};
-		3E35F68D21C1DE4900BAEA53 /* Storyboards */ = {
+		3E820E3E221CA51D008124DB /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				3E35F69621C1DE4B00BAEA53 /* LaunchScreen.storyboard */,
-				3E35F68E21C1DE4900BAEA53 /* Timeline.storyboard */,
+				3E820E3F221CA51D008124DB /* Main.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
 		};
-		3E35F69121C1DE4900BAEA53 /* Resources */ = {
+		3E820E42221CA51D008124DB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				3E35F69921C1DE4B00BAEA53 /* Info.plist */,
-				3E35F69421C1DE4B00BAEA53 /* Assets.xcassets */,
-				3E35F69221C1DE4900BAEA53 /* AppDelegate.swift */,
+				3E820E43221CA51D008124DB /* AppDelegate.swift */,
 			);
 			name = Resources;
-			sourceTree = "<group>";
-		};
-		3E35F6A021C1DE7500BAEA53 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				3E35F6A121C1DE7500BAEA53 /* CloudKit.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3E35F67E21C1DE4900BAEA53 /* insta-clone */ = {
+		3E820E2F221CA51D008124DB /* Instagram */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3E35F69C21C1DE4B00BAEA53 /* Build configuration list for PBXNativeTarget "insta-clone" */;
+			buildConfigurationList = 3E820E4D221CA51F008124DB /* Build configuration list for PBXNativeTarget "Instagram" */;
 			buildPhases = (
-				3E35F67B21C1DE4900BAEA53 /* Sources */,
-				3E35F67C21C1DE4900BAEA53 /* Frameworks */,
-				3E35F67D21C1DE4900BAEA53 /* Resources */,
+				3E820E2C221CA51D008124DB /* Sources */,
+				3E820E2D221CA51D008124DB /* Frameworks */,
+				3E820E2E221CA51D008124DB /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "insta-clone";
-			productName = "insta-clone";
-			productReference = 3E35F67F21C1DE4900BAEA53 /* insta-clone.app */;
+			name = Instagram;
+			productName = Instagram;
+			productReference = 3E820E30221CA51D008124DB /* Instagram.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		3E35F67721C1DE4900BAEA53 /* Project object */ = {
+		3E820E28221CA51D008124DB /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1010;
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Owen Henley";
 				TargetAttributes = {
-					3E35F67E21C1DE4900BAEA53 = {
+					3E820E2F221CA51D008124DB = {
 						CreatedOnToolsVersion = 10.1;
-						SystemCapabilities = {
-							com.apple.Push = {
-								enabled = 1;
-							};
-							com.apple.iCloud = {
-								enabled = 1;
-							};
-						};
 					};
 				};
 			};
-			buildConfigurationList = 3E35F67A21C1DE4900BAEA53 /* Build configuration list for PBXProject "insta-clone" */;
+			buildConfigurationList = 3E820E2B221CA51D008124DB /* Build configuration list for PBXProject "Instagram" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -182,53 +169,56 @@
 				en,
 				Base,
 			);
-			mainGroup = 3E35F67621C1DE4900BAEA53;
-			productRefGroup = 3E35F68021C1DE4900BAEA53 /* Products */;
+			mainGroup = 3E820E27221CA51D008124DB;
+			productRefGroup = 3E820E31221CA51D008124DB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3E35F67E21C1DE4900BAEA53 /* insta-clone */,
+				3E820E2F221CA51D008124DB /* Instagram */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		3E35F67D21C1DE4900BAEA53 /* Resources */ = {
+		3E820E2E221CA51D008124DB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E35F69821C1DE4B00BAEA53 /* LaunchScreen.storyboard in Resources */,
-				3E35F69021C1DE4900BAEA53 /* Timeline.storyboard in Resources */,
-				3E35F69521C1DE4B00BAEA53 /* Assets.xcassets in Resources */,
+				3E820E3C221CA51D008124DB /* DELETEME-VIEWCONTROLLER in Resources */,
+				3E820E35221CA51D008124DB /* DELETEME-MODEL in Resources */,
+				3E820E39221CA51D008124DB /* DELETEME-MODELCONTROLLER in Resources */,
+				3E820E49221CA51F008124DB /* LaunchScreen.storyboard in Resources */,
+				3E820E41221CA51D008124DB /* Main.storyboard in Resources */,
+				3E820E46221CA51F008124DB /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		3E35F67B21C1DE4900BAEA53 /* Sources */ = {
+		3E820E2C221CA51D008124DB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E35F69321C1DE4900BAEA53 /* AppDelegate.swift in Sources */,
+				3E820E44221CA51D008124DB /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		3E35F68E21C1DE4900BAEA53 /* Timeline.storyboard */ = {
+		3E820E3F221CA51D008124DB /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				3E35F68F21C1DE4900BAEA53 /* Base */,
+				3E820E40221CA51D008124DB /* Base */,
 			);
-			name = Timeline.storyboard;
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		3E35F69621C1DE4B00BAEA53 /* LaunchScreen.storyboard */ = {
+		3E820E47221CA51F008124DB /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				3E35F69721C1DE4B00BAEA53 /* Base */,
+				3E820E48221CA51F008124DB /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -236,7 +226,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		3E35F69A21C1DE4B00BAEA53 /* Debug */ = {
+		3E820E4B221CA51F008124DB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -297,7 +287,7 @@
 			};
 			name = Debug;
 		};
-		3E35F69B21C1DE4B00BAEA53 /* Release */ = {
+		3E820E4C221CA51F008124DB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -352,38 +342,36 @@
 			};
 			name = Release;
 		};
-		3E35F69D21C1DE4B00BAEA53 /* Debug */ = {
+		3E820E4E221CA51F008124DB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "insta-clone/insta-clone.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CYZA2EE6W8;
-				INFOPLIST_FILE = "insta-clone/Info.plist";
+				INFOPLIST_FILE = Instagram/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "io.owenhenley.insta-clone";
+				PRODUCT_BUNDLE_IDENTIFIER = io.owenhenley.Instagram;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		3E35F69E21C1DE4B00BAEA53 /* Release */ = {
+		3E820E4F221CA51F008124DB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "insta-clone/insta-clone.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CYZA2EE6W8;
-				INFOPLIST_FILE = "insta-clone/Info.plist";
+				INFOPLIST_FILE = Instagram/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "io.owenhenley.insta-clone";
+				PRODUCT_BUNDLE_IDENTIFIER = io.owenhenley.Instagram;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -393,25 +381,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3E35F67A21C1DE4900BAEA53 /* Build configuration list for PBXProject "insta-clone" */ = {
+		3E820E2B221CA51D008124DB /* Build configuration list for PBXProject "Instagram" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3E35F69A21C1DE4B00BAEA53 /* Debug */,
-				3E35F69B21C1DE4B00BAEA53 /* Release */,
+				3E820E4B221CA51F008124DB /* Debug */,
+				3E820E4C221CA51F008124DB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3E35F69C21C1DE4B00BAEA53 /* Build configuration list for PBXNativeTarget "insta-clone" */ = {
+		3E820E4D221CA51F008124DB /* Build configuration list for PBXNativeTarget "Instagram" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3E35F69D21C1DE4B00BAEA53 /* Debug */,
-				3E35F69E21C1DE4B00BAEA53 /* Release */,
+				3E820E4E221CA51F008124DB /* Debug */,
+				3E820E4F221CA51F008124DB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 3E35F67721C1DE4900BAEA53 /* Project object */;
+	rootObject = 3E820E28221CA51D008124DB /* Project object */;
 }

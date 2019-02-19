@@ -1,9 +1,9 @@
 //
 //  AppDelegate.swift
-//  insta-clone
+//  Instagram
 //
-//  Created by Owen Henley on 12/12/18.
-//  Copyright © 2018 Owen Henley. All rights reserved.
+//  Created by Owen Henley on 2/19/19.
+//  Copyright © 2019 Owen Henley. All rights reserved.
 //
 
 import UIKit
