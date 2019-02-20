@@ -7,25 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3E820E35221CA51D008124DB /* DELETEME-MODEL in Resources */ = {isa = PBXBuildFile; fileRef = 3E820E34221CA51D008124DB /* DELETEME-MODEL */; };
-		3E820E39221CA51D008124DB /* DELETEME-MODELCONTROLLER in Resources */ = {isa = PBXBuildFile; fileRef = 3E820E38221CA51D008124DB /* DELETEME-MODELCONTROLLER */; };
-		3E820E3C221CA51D008124DB /* DELETEME-VIEWCONTROLLER in Resources */ = {isa = PBXBuildFile; fileRef = 3E820E3B221CA51D008124DB /* DELETEME-VIEWCONTROLLER */; };
-		3E820E41221CA51D008124DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E820E3F221CA51D008124DB /* Main.storyboard */; };
 		3E820E44221CA51D008124DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E820E43221CA51D008124DB /* AppDelegate.swift */; };
 		3E820E46221CA51F008124DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E820E45221CA51F008124DB /* Assets.xcassets */; };
 		3E820E49221CA51F008124DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E820E47221CA51F008124DB /* LaunchScreen.storyboard */; };
+		3EE318D3221DD55100FEBB2C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE318D2221DD55100FEBB2C /* ViewController.swift */; };
+		3EE318D5221DD68200FEBB2C /* AutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE318D4221DD68200FEBB2C /* AutoLayout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3E820E30221CA51D008124DB /* Instagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		3E820E34221CA51D008124DB /* DELETEME-MODEL */ = {isa = PBXFileReference; lastKnownFileType = text; path = "DELETEME-MODEL"; sourceTree = "<group>"; };
-		3E820E38221CA51D008124DB /* DELETEME-MODELCONTROLLER */ = {isa = PBXFileReference; lastKnownFileType = text; path = "DELETEME-MODELCONTROLLER"; sourceTree = "<group>"; };
-		3E820E3B221CA51D008124DB /* DELETEME-VIEWCONTROLLER */ = {isa = PBXFileReference; lastKnownFileType = text; path = "DELETEME-VIEWCONTROLLER"; sourceTree = "<group>"; };
-		3E820E40221CA51D008124DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3E820E43221CA51D008124DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3E820E45221CA51F008124DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3E820E48221CA51F008124DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3E820E4A221CA51F008124DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3EE318D2221DD55100FEBB2C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3EE318D4221DD68200FEBB2C /* AutoLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoLayout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,9 +54,6 @@
 		3E820E32221CA51D008124DB /* Instagram */ = {
 			isa = PBXGroup;
 			children = (
-				3E820E45221CA51F008124DB /* Assets.xcassets */,
-				3E820E47221CA51F008124DB /* LaunchScreen.storyboard */,
-				3E820E4A221CA51F008124DB /* Info.plist */,
 				3E820E33221CA51D008124DB /* Models */,
 				3E820E36221CA51D008124DB /* Controllers */,
 				3E820E3D221CA51D008124DB /* Views */,
@@ -72,7 +65,6 @@
 		3E820E33221CA51D008124DB /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				3E820E34221CA51D008124DB /* DELETEME-MODEL */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -89,7 +81,6 @@
 		3E820E37221CA51D008124DB /* Model Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				3E820E38221CA51D008124DB /* DELETEME-MODELCONTROLLER */,
 			);
 			name = "Model Controllers";
 			sourceTree = "<group>";
@@ -97,7 +88,7 @@
 		3E820E3A221CA51D008124DB /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				3E820E3B221CA51D008124DB /* DELETEME-VIEWCONTROLLER */,
+				3EE318D2221DD55100FEBB2C /* ViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -105,6 +96,7 @@
 		3E820E3D221CA51D008124DB /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3E820E47221CA51F008124DB /* LaunchScreen.storyboard */,
 				3E820E3E221CA51D008124DB /* Storyboards */,
 			);
 			name = Views;
@@ -113,7 +105,6 @@
 		3E820E3E221CA51D008124DB /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				3E820E3F221CA51D008124DB /* Main.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -122,6 +113,9 @@
 			isa = PBXGroup;
 			children = (
 				3E820E43221CA51D008124DB /* AppDelegate.swift */,
+				3E820E4A221CA51F008124DB /* Info.plist */,
+				3E820E45221CA51F008124DB /* Assets.xcassets */,
+				3EE318D4221DD68200FEBB2C /* AutoLayout.swift */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -184,11 +178,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E820E3C221CA51D008124DB /* DELETEME-VIEWCONTROLLER in Resources */,
-				3E820E35221CA51D008124DB /* DELETEME-MODEL in Resources */,
-				3E820E39221CA51D008124DB /* DELETEME-MODELCONTROLLER in Resources */,
 				3E820E49221CA51F008124DB /* LaunchScreen.storyboard in Resources */,
-				3E820E41221CA51D008124DB /* Main.storyboard in Resources */,
 				3E820E46221CA51F008124DB /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -200,6 +190,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EE318D5221DD68200FEBB2C /* AutoLayout.swift in Sources */,
+				3EE318D3221DD55100FEBB2C /* ViewController.swift in Sources */,
 				3E820E44221CA51D008124DB /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -207,14 +199,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		3E820E3F221CA51D008124DB /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3E820E40221CA51D008124DB /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		3E820E47221CA51F008124DB /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -349,6 +333,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CYZA2EE6W8;
 				INFOPLIST_FILE = Instagram/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -367,6 +352,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CYZA2EE6W8;
 				INFOPLIST_FILE = Instagram/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
