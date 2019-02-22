@@ -1,2 +1,1 @@
-# InstagramClone
-Instagram clone with CloudKit
+# Instagram Clone
