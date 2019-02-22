@@ -8,12 +8,14 @@
 
 import UIKit
 import Firebase
+import SVProgressHUD
 
 class ViewController: UIViewController {
 
     private let plusPhotoButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "plus_photo"), for: .normal)
+        button.addTarget(self, action: #selector(handleAddPhoto), for: .touchUpInside)
         return button
     }()
 
@@ -22,6 +24,7 @@ class ViewController: UIViewController {
         textField.placeholder = "Email"
         textField.backgroundColor = UIColor(white: 0, alpha: 0.03)
         textField.borderStyle = .roundedRect
+        textField.keyboardType = .emailAddress
 
         textField.addTarget(self, action: #selector(handleTextDidChange), for: .editingChanged)
 
@@ -33,6 +36,7 @@ class ViewController: UIViewController {
         textField.placeholder = "Username"
         textField.backgroundColor = UIColor(white: 0, alpha: 0.03)
         textField.borderStyle = .roundedRect
+        textField.autocapitalizationType = .none
 
         textField.addTarget(self, action: #selector(handleTextDidChange), for: .editingChanged)
 
@@ -44,6 +48,7 @@ class ViewController: UIViewController {
         textField.placeholder = "Password"
         textField.backgroundColor = UIColor(white: 0, alpha: 0.03)
         textField.borderStyle = .roundedRect
+        textField.isSecureTextEntry = true
 
         textField.addTarget(self, action: #selector(handleTextDidChange), for: .editingChanged)
 
@@ -79,6 +84,8 @@ class ViewController: UIViewController {
                                             height: 140))
 
         setupTextFields()
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view,
+                                                              action: #selector(UIView.endEditing(_:))))
     }
 
     private func setupTextFields() {
@@ -103,7 +110,7 @@ class ViewController: UIViewController {
     }
 
     @objc private func handleSignUp() {
-        print("Signing Up...")
+        SVProgressHUD.show()
         guard let email = emailTF.text, email != "",
             let username = usernameTF.text, username != "",
             let password = passwordTF.text, password != "" else {
@@ -111,20 +118,56 @@ class ViewController: UIViewController {
                 return
         }
 
-        Auth.auth().createUser(withEmail: email, password: password) { (auth, error) in
+        Auth.auth().createUser(withEmail: email, password: password, completion: { (user, error: Error?) in
             if let error = error {
                 print("❌ Error in File: \(#file), Function: \(#function), Line: \(#line), Message: \(error). \(error.localizedDescription) ❌")
                 return
             }
-            print("Successfull created new user: \(auth?.user.uid ?? "")")
-            self.resignFirstResponder()
-        }
+
+            print("Successfully created user:", user?.user.uid ?? "")
+
+            guard let image = self.plusPhotoButton.imageView?.image else { return }
+            guard let uploadData = image.jpegData(compressionQuality: 0.3) else { return }
+
+            let filename = NSUUID().uuidString
+            let storageRef = Storage.storage().reference().child("profile_images").child(filename)
+            storageRef.putData(uploadData, metadata: nil, completion: { (metadata, error) in
+                if let error = error {
+                    print("❌ Error in File: \(#file), Function: \(#function), Line: \(#line), Message: \(error). \(error.localizedDescription) ❌")
+                    return
+                }
+
+                storageRef.downloadURL(completion: { (downloadURL, error) in
+                    if let error = error {
+                        print("❌ Error in File: \(#file), Function: \(#function), Line: \(#line), Message: \(error). \(error.localizedDescription) ❌")
+                        return
+                    }
+
+                    guard let profileImageUrl = downloadURL?.absoluteString else { return }
+                    print("Successfully uploaded profile image:", profileImageUrl)
+
+                    guard let uid = user?.user.uid else { return }
+
+                    let dictionaryValues = ["username": username, "profileImageUrl": profileImageUrl]
+                    let values = [uid: dictionaryValues]
+                    Database.database().reference().child("users").updateChildValues(values, withCompletionBlock: { (err, ref) in
+                        if let error = error {
+                            print("❌ Error in File: \(#file), Function: \(#function), Line: \(#line), Message: \(error). \(error.localizedDescription) ❌")
+                            return
+                        }
+                        print("Successfully saved user info to db")
+                        SVProgressHUD.dismiss()
+                    })
+                })
+            })
+            self.view.endEditing(true) // resign keyboard
+        })
     }
 
     @objc private func handleTextDidChange() {
         let formIsValid = emailTF.text != "" &&
-                          usernameTF.text != "" &&
-                          passwordTF.text != ""
+            usernameTF.text != "" &&
+            passwordTF.text != ""
 
         if formIsValid {
             signUpButton.backgroundColor = UIColor.rgb(red: 17, green: 154, blue: 237)
@@ -133,5 +176,37 @@ class ViewController: UIViewController {
             signUpButton.backgroundColor = UIColor.rgb(red: 149, green: 204, blue: 244)
             signUpButton.isEnabled = false
         }
+    }
+}
+
+extension ViewController: UIGestureRecognizerDelegate {
+
+}
+
+extension ViewController: UITextFieldDelegate {
+
+}
+
+extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    @objc private func handleAddPhoto() {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = true
+        present(imagePickerController, animated: true)
+    }
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+            plusPhotoButton.setImage(editedImage.withRenderingMode(.alwaysOriginal), for: .normal)
+        } else if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            plusPhotoButton.setImage(originalImage.withRenderingMode(.alwaysOriginal), for: .normal)
+        }
+
+        plusPhotoButton.layer.cornerRadius = plusPhotoButton.frame.width / 2
+        plusPhotoButton.layer.masksToBounds = true
+        plusPhotoButton.layer.borderColor = UIColor.rgb(red: 149, green: 204, blue: 244).cgColor
+        plusPhotoButton.layer.borderWidth = 2
+
+        dismiss(animated: true)
     }
 }
