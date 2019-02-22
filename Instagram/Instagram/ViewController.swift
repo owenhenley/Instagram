@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class ViewController: UIViewController {
 
@@ -21,6 +22,9 @@ class ViewController: UIViewController {
         textField.placeholder = "Email"
         textField.backgroundColor = UIColor(white: 0, alpha: 0.03)
         textField.borderStyle = .roundedRect
+
+        textField.addTarget(self, action: #selector(handleTextDidChange), for: .editingChanged)
+
         return textField
     }()
 
@@ -29,6 +33,9 @@ class ViewController: UIViewController {
         textField.placeholder = "Username"
         textField.backgroundColor = UIColor(white: 0, alpha: 0.03)
         textField.borderStyle = .roundedRect
+
+        textField.addTarget(self, action: #selector(handleTextDidChange), for: .editingChanged)
+
         return textField
     }()
 
@@ -37,16 +44,20 @@ class ViewController: UIViewController {
         textField.placeholder = "Password"
         textField.backgroundColor = UIColor(white: 0, alpha: 0.03)
         textField.borderStyle = .roundedRect
+
+        textField.addTarget(self, action: #selector(handleTextDidChange), for: .editingChanged)
+
         return textField
     }()
 
     private let signUpButton: UIButton = {
         let signUpButton = UIButton(type: .system)
         signUpButton.setTitle("Sign Up", for: .normal)
-        signUpButton.backgroundColor = UIColor(red: 149/255, green: 204/255, blue: 244/255, alpha: 0.8)
+        signUpButton.backgroundColor = UIColor.rgb(red: 149, green: 204, blue: 244)
         signUpButton.layer.cornerRadius = 4
         signUpButton.setTitleColor(.white, for: .normal)
-
+        signUpButton.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
+        signUpButton.isEnabled = false
         return signUpButton
     }()
 
@@ -89,5 +100,38 @@ class ViewController: UIViewController {
                                         left: 50,
                                         bottom: 200,
                                         right: 50))
+    }
+
+    @objc private func handleSignUp() {
+        print("Signing Up...")
+        guard let email = emailTF.text, email != "",
+            let username = usernameTF.text, username != "",
+            let password = passwordTF.text, password != "" else {
+                print("❌ Input incorrect ❌")
+                return
+        }
+
+        Auth.auth().createUser(withEmail: email, password: password) { (auth, error) in
+            if let error = error {
+                print("❌ Error in File: \(#file), Function: \(#function), Line: \(#line), Message: \(error). \(error.localizedDescription) ❌")
+                return
+            }
+            print("Successfull created new user: \(auth?.user.uid ?? "")")
+            self.resignFirstResponder()
+        }
+    }
+
+    @objc private func handleTextDidChange() {
+        let formIsValid = emailTF.text != "" &&
+                          usernameTF.text != "" &&
+                          passwordTF.text != ""
+
+        if formIsValid {
+            signUpButton.backgroundColor = UIColor.rgb(red: 17, green: 154, blue: 237)
+            signUpButton.isEnabled = true
+        } else {
+            signUpButton.backgroundColor = UIColor.rgb(red: 149, green: 204, blue: 244)
+            signUpButton.isEnabled = false
+        }
     }
 }
