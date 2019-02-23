@@ -27,7 +27,7 @@ class UserProfileVC: UICollectionViewController {
             let username = dictionary[USERNAME] as? String
             self.navigationItem.title = username
         }) { (error) in
-            print("❌ Error in File: \(#file), Function: \(#function), Line: \(#line), Message: \(error). \(error.localizedDescription) ❌")
+            print(" Error in File: \(#file), Function: \(#function), Line: \(#line), Message: \(error). \(error.localizedDescription) ")
         }
     }
 }

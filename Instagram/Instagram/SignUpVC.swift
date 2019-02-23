@@ -70,44 +70,9 @@ class SignUpVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(plusPhotoButton)
-
-        // Layout
-        plusPhotoButton.centerHorizontallyInSuperview()
-        plusPhotoButton.anchor(top: view.topAnchor,
-                               leading: nil,
-                               bottom: nil,
-                               trailing: nil,
-                               padding: .init(top: 100,
-                                              left: 0,
-                                              bottom: 0,
-                                              right: 0),
-                               size: CGSize(width: 140,
-                                            height: 140))
-
-        setupTextFields()
+        setupViews()
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view,
                                                               action: #selector(UIView.endEditing(_:))))
-    }
-
-    private func setupTextFields() {
-        let stackView = UIStackView(arrangedSubviews: [emailTF,
-                                                       usernameTF,
-                                                       passwordTF,
-                                                       signUpButton])
-        stackView.distribution = .fillEqually
-        stackView.axis = .vertical
-        stackView.spacing = 12
-
-        view.addSubview(stackView)
-
-        stackView.anchor(top: plusPhotoButton.bottomAnchor,
-                         leading: view.leadingAnchor,
-                         bottom: view.bottomAnchor,
-                         trailing: view.trailingAnchor,
-                         padding: .init(top: 24,
-                                        left: 50,
-                                        bottom: 200,
-                                        right: 50))
     }
 
     @objc private func handleSignUp() {
@@ -188,7 +153,7 @@ extension SignUpVC: UITextFieldDelegate {
 
 }
 
-extension SignUpVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension SignUpVC: UIImagePickerControllerDelegate {
     @objc private func handleAddPhoto() {
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
@@ -210,4 +175,55 @@ extension SignUpVC: UIImagePickerControllerDelegate, UINavigationControllerDeleg
 
         dismiss(animated: true)
     }
+}
+
+extension SignUpVC: UINavigationControllerDelegate {
+
+}
+
+private extension SignUpVC {
+    func setupViews() {
+        setupAddPhotoButton()
+        setupTextFields()
+    }
+    private func setupAddPhotoButton() {
+        plusPhotoButton.centerHorizontallyInSuperview()
+        plusPhotoButton.anchor(top: view.topAnchor,
+                               leading: nil,
+                               bottom: nil,
+                               trailing: nil,
+                               padding: .init(top: 100,
+                                              left: 0,
+                                              bottom: 0,
+                                              right: 0),
+                               size: CGSize(width: 140,
+                                            height: 140))
+    }
+
+
+    func setupButtons() {
+
+    }
+
+    func setupTextFields() {
+        let stackView = UIStackView(arrangedSubviews: [emailTF,
+                                                       usernameTF,
+                                                       passwordTF,
+                                                       signUpButton])
+        stackView.distribution = .fillEqually
+        stackView.axis = .vertical
+        stackView.spacing = 12
+
+        view.addSubview(stackView)
+
+        stackView.anchor(top: plusPhotoButton.bottomAnchor,
+                         leading: view.leadingAnchor,
+                         bottom: view.bottomAnchor,
+                         trailing: view.trailingAnchor,
+                         padding: .init(top: 24,
+                                        left: 50,
+                                        bottom: 200,
+                                        right: 50))
+    }
+
 }
