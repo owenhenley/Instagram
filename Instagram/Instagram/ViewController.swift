@@ -14,7 +14,7 @@ class ViewController: UIViewController {
 
     private let plusPhotoButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(named: "plus_photo"), for: .normal)
+        button.setImage(Icon.AddPhoto, for: .normal)
         button.addTarget(self, action: #selector(handleAddPhoto), for: .touchUpInside)
         return button
     }()
@@ -114,7 +114,7 @@ class ViewController: UIViewController {
         guard let email = emailTF.text, email != "",
             let username = usernameTF.text, username != "",
             let password = passwordTF.text, password != "" else {
-                print("❌ Input incorrect ❌")
+                print("❌ Input Incorrect ❌")
                 return
         }
 
@@ -130,7 +130,7 @@ class ViewController: UIViewController {
             guard let uploadData = image.jpegData(compressionQuality: 0.3) else { return }
 
             let filename = NSUUID().uuidString
-            let storageRef = Storage.storage().reference().child("profile_images").child(filename)
+            let storageRef = Storage.storage().reference().child(PROFILE_IMAGES).child(filename)
             storageRef.putData(uploadData, metadata: nil, completion: { (metadata, error) in
                 if let error = error {
                     print("❌ Error in File: \(#file), Function: \(#function), Line: \(#line), Message: \(error). \(error.localizedDescription) ❌")
@@ -148,9 +148,9 @@ class ViewController: UIViewController {
 
                     guard let uid = user?.user.uid else { return }
 
-                    let dictionaryValues = ["username": username, "profileImageUrl": profileImageUrl]
+                    let dictionaryValues = [USERNAME: username, PROFILE_IMAGE_URL: profileImageUrl]
                     let values = [uid: dictionaryValues]
-                    Database.database().reference().child("users").updateChildValues(values, withCompletionBlock: { (err, ref) in
+                    Database.database().reference().child(USERS).updateChildValues(values, withCompletionBlock: { (err, ref) in
                         if let error = error {
                             print("❌ Error in File: \(#file), Function: \(#function), Line: \(#line), Message: \(error). \(error.localizedDescription) ❌")
                             return
