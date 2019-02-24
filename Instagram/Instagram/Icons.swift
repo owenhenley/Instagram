@@ -29,7 +29,7 @@ struct Icon {
     static let Grid = UIImage(named: "grid")!
     static let LogoWhite = UIImage(named: "logo_white")!
     static let LogoBlack = UIImage(named: "logo_black")!
-    static let More = UIImage(named: "more")!
+    static let List = UIImage(named: "list")!
     static let Ribbon = UIImage(named: "ribbon")!
     static let RightArrow = UIImage(named: "right_arrow")!
     static let Save = UIImage(named: "save")!
