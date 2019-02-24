@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import SVProgressHUD
+import SnapKit
 
 class SignUpVC: UIViewController {
 
@@ -186,18 +187,13 @@ private extension SignUpVC {
         setupAddPhotoButton()
         setupTextFields()
     }
-    private func setupAddPhotoButton() {
+
+    func setupAddPhotoButton() {
         plusPhotoButton.centerHorizontallyInSuperview()
-        plusPhotoButton.anchor(top: view.topAnchor,
-                               leading: nil,
-                               bottom: nil,
-                               trailing: nil,
-                               padding: .init(top: 100,
-                                              left: 0,
-                                              bottom: 0,
-                                              right: 0),
-                               size: CGSize(width: 140,
-                                            height: 140))
+        plusPhotoButton.snp.makeConstraints { (make) in
+            make.top.equalTo(view.snp.top).inset(100)
+            make.size.equalTo(140)
+        }
     }
 
 

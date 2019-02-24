@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E74B5972223136900C8CC24 /* UserProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E74B5962223136900C8CC24 /* UserProfileHeader.swift */; };
+		3E74B5992223191400C8CC24 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E74B5982223191400C8CC24 /* FirebaseManager.swift */; };
+		3E74B59B22231A0800C8CC24 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E74B59A22231A0800C8CC24 /* User.swift */; };
 		3E820E44221CA51D008124DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E820E43221CA51D008124DB /* AppDelegate.swift */; };
 		3E820E46221CA51F008124DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E820E45221CA51F008124DB /* Assets.xcassets */; };
 		3E820E49221CA51F008124DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E820E47221CA51F008124DB /* LaunchScreen.storyboard */; };
@@ -23,6 +26,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3E74B5962223136900C8CC24 /* UserProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileHeader.swift; sourceTree = "<group>"; };
+		3E74B5982223191400C8CC24 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		3E74B59A22231A0800C8CC24 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		3E820E30221CA51D008124DB /* Instagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E820E43221CA51D008124DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3E820E45221CA51F008124DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -97,6 +103,7 @@
 		3E820E33221CA51D008124DB /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				3E74B59A22231A0800C8CC24 /* User.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -130,6 +137,7 @@
 		3E820E3D221CA51D008124DB /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3E74B5962223136900C8CC24 /* UserProfileHeader.swift */,
 				3E820E3E221CA51D008124DB /* Storyboards */,
 			);
 			name = Views;
@@ -157,6 +165,7 @@
 		3EA8370A2221E0D400F93BF2 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				3E74B5982223191400C8CC24 /* FirebaseManager.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -271,6 +280,7 @@
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -281,6 +291,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -320,12 +331,15 @@
 			files = (
 				3EA837072221D9D600F93BF2 /* Icons.swift in Sources */,
 				3EE318D5221DD68200FEBB2C /* AutoLayout.swift in Sources */,
+				3E74B5992223191400C8CC24 /* FirebaseManager.swift in Sources */,
 				3EDA381522206F7B00E2C539 /* UIColor+Ext.swift in Sources */,
+				3E74B5972223136900C8CC24 /* UserProfileHeader.swift in Sources */,
 				3EA837032221D6A300F93BF2 /* MainTabBarController.swift in Sources */,
 				3EE318D3221DD55100FEBB2C /* SignUpVC.swift in Sources */,
 				3E820E44221CA51D008124DB /* AppDelegate.swift in Sources */,
 				3EA837052221D78E00F93BF2 /* UserProfileVC.swift in Sources */,
 				3EA837092221DFCE00F93BF2 /* Constants.swift in Sources */,
+				3E74B59B22231A0800C8CC24 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

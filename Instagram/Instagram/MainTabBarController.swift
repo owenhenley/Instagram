@@ -13,6 +13,12 @@ class MainTabBarController: UITabBarController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupTabBar()
+    }
+
+    private func setupTabBar() {
+        tabBar.tintColor = .black
+
         let collectionViewLayout = UICollectionViewFlowLayout()
         let userProfileVC = UserProfileVC(collectionViewLayout: collectionViewLayout)
 
@@ -20,12 +26,9 @@ class MainTabBarController: UITabBarController {
         navController.tabBarItem.image = Icon.ProfileUnselected
         navController.tabBarItem.selectedImage = Icon.ProfileSelected
 
-        tabBar.tintColor = .black
-
         viewControllers = [
             navController
         ]
     }
-
 
 }
