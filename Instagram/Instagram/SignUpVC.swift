@@ -13,6 +13,7 @@ import SnapKit
 
 class SignUpVC: UIViewController {
 
+    // MARK: - Controls
     private let plusPhotoButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(Icon.AddPhoto, for: .normal)
@@ -26,9 +27,7 @@ class SignUpVC: UIViewController {
         textField.backgroundColor = UIColor(white: 0, alpha: 0.03)
         textField.borderStyle = .roundedRect
         textField.keyboardType = .emailAddress
-
         textField.addTarget(self, action: #selector(handleTextDidChange), for: .editingChanged)
-
         return textField
     }()
 
@@ -38,9 +37,7 @@ class SignUpVC: UIViewController {
         textField.backgroundColor = UIColor(white: 0, alpha: 0.03)
         textField.borderStyle = .roundedRect
         textField.autocapitalizationType = .none
-
         textField.addTarget(self, action: #selector(handleTextDidChange), for: .editingChanged)
-
         return textField
     }()
 
@@ -50,9 +47,7 @@ class SignUpVC: UIViewController {
         textField.backgroundColor = UIColor(white: 0, alpha: 0.03)
         textField.borderStyle = .roundedRect
         textField.isSecureTextEntry = true
-
         textField.addTarget(self, action: #selector(handleTextDidChange), for: .editingChanged)
-
         return textField
     }()
 
@@ -71,7 +66,7 @@ class SignUpVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(plusPhotoButton)
-        setupViews()
+        layoutViews()
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view,
                                                               action: #selector(UIView.endEditing(_:))))
     }
@@ -85,41 +80,42 @@ class SignUpVC: UIViewController {
                 return
         }
 
-        Auth.auth().createUser(withEmail: email, password: password, completion: { (user, error: Error?) in
+        AUTH.createUser(withEmail: email, password: password, completion: { (user, error: Error?) in
             if let error = error {
                 print(" Error in File: \(#file), Function: \(#function), Line: \(#line), Message: \(error). \(error.localizedDescription) ")
+                SVProgressHUD.dismiss()
                 return
             }
 
-            print("Successfully created user:", user?.user.uid ?? "")
-
-            guard let image = self.plusPhotoButton.imageView?.image else { return }
-            guard let uploadData = image.jpegData(compressionQuality: 0.3) else { return }
+            guard let image = self.plusPhotoButton.imageView?.image else { return SVProgressHUD.dismiss() }
+            guard let uploadData = image.jpegData(compressionQuality: 0.3) else { return SVProgressHUD.dismiss() }
 
             let filename = NSUUID().uuidString
             let storageRef = Storage.storage().reference().child(PROFILE_IMAGES).child(filename)
             storageRef.putData(uploadData, metadata: nil, completion: { (metadata, error) in
                 if let error = error {
                     print(" Error in File: \(#file), Function: \(#function), Line: \(#line), Message: \(error). \(error.localizedDescription) ")
+                    SVProgressHUD.dismiss()
                     return
                 }
 
                 storageRef.downloadURL(completion: { (downloadURL, error) in
                     if let error = error {
                         print(" Error in File: \(#file), Function: \(#function), Line: \(#line), Message: \(error). \(error.localizedDescription) ")
+                        SVProgressHUD.dismiss()
                         return
                     }
 
-                    guard let profileImageUrl = downloadURL?.absoluteString else { return }
-                    print("Successfully uploaded profile image:", profileImageUrl)
+                    guard let profileImageUrl = downloadURL?.absoluteString else { return SVProgressHUD.dismiss() }
 
-                    guard let uid = user?.user.uid else { return }
+                    guard let uid = user?.user.uid else { return SVProgressHUD.dismiss() }
 
                     let dictionaryValues = [USERNAME: username, PROFILE_IMAGE_URL: profileImageUrl]
                     let values = [uid: dictionaryValues]
                     Database.database().reference().child(USERS).updateChildValues(values, withCompletionBlock: { (err, ref) in
                         if let error = error {
                             print(" Error in File: \(#file), Function: \(#function), Line: \(#line), Message: \(error). \(error.localizedDescription) ")
+                            SVProgressHUD.dismiss()
                             return
                         }
                         print("Successfully saved user info to db")
@@ -179,29 +175,24 @@ extension SignUpVC: UIImagePickerControllerDelegate {
 }
 
 extension SignUpVC: UINavigationControllerDelegate {
-
+    // No Code
 }
 
 private extension SignUpVC {
-    func setupViews() {
-        setupAddPhotoButton()
-        setupTextFields()
+    func layoutViews() {
+        layoutAddPhotoButton()
+        layoutTextFields()
     }
 
-    func setupAddPhotoButton() {
-        plusPhotoButton.centerHorizontallyInSuperview()
+    func layoutAddPhotoButton() {
         plusPhotoButton.snp.makeConstraints { (make) in
             make.top.equalTo(view.snp.top).inset(100)
             make.size.equalTo(140)
+            make.centerX.equalToSuperview()
         }
     }
 
-
-    func setupButtons() {
-
-    }
-
-    func setupTextFields() {
+    func layoutTextFields() {
         let stackView = UIStackView(arrangedSubviews: [emailTF,
                                                        usernameTF,
                                                        passwordTF,
@@ -211,15 +202,11 @@ private extension SignUpVC {
         stackView.spacing = 12
 
         view.addSubview(stackView)
-
-        stackView.anchor(top: plusPhotoButton.bottomAnchor,
-                         leading: view.leadingAnchor,
-                         bottom: view.bottomAnchor,
-                         trailing: view.trailingAnchor,
-                         padding: .init(top: 24,
-                                        left: 50,
-                                        bottom: 200,
-                                        right: 50))
+        stackView.snp.makeConstraints { (make) in
+            make.top.equalTo(plusPhotoButton.snp.bottom).inset(24)
+            make.left.equalToSuperview().inset(50)
+            make.right.equalToSuperview().inset(50)
+            // make.bottom.equalToSuperview()
+        }
     }
-
 }

@@ -13,18 +13,17 @@ class UserProfileVC: UICollectionViewController {
 
     private var user: User?
 
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView?.backgroundColor = .white
-        fetchUsername()
-        collectionView.register(UserProfileHeader.self,
-                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-                                withReuseIdentifier: "headerId")
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cellId")
+        fetchAndDisplayUsername()
+        setupCollectionViewCells()
     }
 
+    // MARK: - Methods
     /// Fetches username and sets navigation title as the username
-    private func fetchUsername() {
+    private func fetchAndDisplayUsername() {
         guard let uid = CURRENT_USER else { return }
         DB_REF.child(USERS).child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
             print(snapshot.value ?? "No Value")
@@ -43,6 +42,14 @@ class UserProfileVC: UICollectionViewController {
 
 // MARK: - UICollectionView
 extension UserProfileVC {
+    private func setupCollectionViewCells() {
+        collectionView.register(UserProfileHeader.self,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                withReuseIdentifier: "headerId")
+        collectionView.register(UICollectionViewCell.self,
+                                forCellWithReuseIdentifier: "cellId")
+    }
+
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 19
     }

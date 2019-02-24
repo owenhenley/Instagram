@@ -20,9 +20,11 @@ class UserProfileHeader: UICollectionViewCell {
             usernameLabel.text = user?.username
         }
     }
-    lazy var statsStackView = UIStackView(arrangedSubviews: [postsLabel, followersLabel, followingLabel])
 
     // MARK: - Controls
+    lazy var statsStackView = UIStackView(arrangedSubviews: [postsLabel, followersLabel, followingLabel])
+    lazy var toolbarStackView = UIStackView(arrangedSubviews: [gridButton, listButton, bookmarksButton])
+    
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 80 / 2
@@ -43,7 +45,6 @@ class UserProfileHeader: UICollectionViewCell {
         button.tintColor = UIColor(white: 0, alpha: 0.2)
         return button
     }()
-
 
     let bookmarksButton: UIButton = {
         let button = UIButton(type: .system)
@@ -150,7 +151,7 @@ class UserProfileHeader: UICollectionViewCell {
 extension UserProfileHeader {
     func layoutViews() {
         layoutProfileImageView()
-        layoutBottomToolbar()
+        layoutToolbar()
         layoutProfileStats()
         layoutEditProfileButton()
         layoutUsernameLabel()
@@ -174,11 +175,10 @@ extension UserProfileHeader {
         }
     }
     
-    func layoutBottomToolbar() {
-        let stackView = UIStackView(arrangedSubviews: [gridButton, listButton, bookmarksButton])
-        stackView.distribution = .fillEqually
-        addSubview(stackView)
-        stackView.snp.makeConstraints { (make) in
+    func layoutToolbar() {
+        toolbarStackView.distribution = .fillEqually
+        addSubview(toolbarStackView)
+        toolbarStackView.snp.makeConstraints { (make) in
             make.left.right.bottom.equalToSuperview()
             make.height.equalTo(43)
         }
@@ -187,7 +187,7 @@ extension UserProfileHeader {
         topDividerView.backgroundColor = .lightGray
         addSubview(topDividerView)
         topDividerView.snp.makeConstraints { (make) in
-            make.bottom.equalTo(stackView.snp.top)
+            make.bottom.equalTo(toolbarStackView.snp.top)
             make.height.equalTo(0.5)
             make.left.right.equalToSuperview()
         }
@@ -196,7 +196,7 @@ extension UserProfileHeader {
         bottomDividerView.backgroundColor = .lightGray
         addSubview(bottomDividerView)
         bottomDividerView.snp.makeConstraints { (make) in
-            make.bottom.equalTo(stackView.snp.bottom)
+            make.bottom.equalTo(toolbarStackView.snp.bottom)
             make.height.equalTo(0.5)
             make.left.right.equalToSuperview()
         }

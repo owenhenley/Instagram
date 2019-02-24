@@ -21,7 +21,6 @@
 		3EDA38172220735500E2C539 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3EDA38162220735500E2C539 /* GoogleService-Info.plist */; };
 		3EDA3819222075F700E2C539 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3EDA3818222075F700E2C539 /* Main.storyboard */; };
 		3EE318D3221DD55100FEBB2C /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE318D2221DD55100FEBB2C /* SignUpVC.swift */; };
-		3EE318D5221DD68200FEBB2C /* AutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE318D4221DD68200FEBB2C /* AutoLayout.swift */; };
 		FCFB0F02990CA2EFFAD3F065 /* Pods_Instagram.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70EAE1EE5C33B1A79F586DD9 /* Pods_Instagram.framework */; };
 /* End PBXBuildFile section */
 
@@ -42,7 +41,6 @@
 		3EDA38162220735500E2C539 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3EDA3818222075F700E2C539 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		3EE318D2221DD55100FEBB2C /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
-		3EE318D4221DD68200FEBB2C /* AutoLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoLayout.swift; sourceTree = "<group>"; };
 		70EAE1EE5C33B1A79F586DD9 /* Pods_Instagram.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Instagram.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B17C6C8C6C2111B59DCC3478 /* Pods-Instagram.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram.release.xcconfig"; path = "Target Support Files/Pods-Instagram/Pods-Instagram.release.xcconfig"; sourceTree = "<group>"; };
 		B71FC06667F4A3F2FE53EEB0 /* Pods-Instagram.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram.debug.xcconfig"; path = "Target Support Files/Pods-Instagram/Pods-Instagram.debug.xcconfig"; sourceTree = "<group>"; };
@@ -183,7 +181,6 @@
 		3EDA381322206F3800E2C539 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				3EE318D4221DD68200FEBB2C /* AutoLayout.swift */,
 				3EDA381422206F7B00E2C539 /* UIColor+Ext.swift */,
 			);
 			name = Extensions;
@@ -330,7 +327,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3EA837072221D9D600F93BF2 /* Icons.swift in Sources */,
-				3EE318D5221DD68200FEBB2C /* AutoLayout.swift in Sources */,
 				3E74B5992223191400C8CC24 /* FirebaseManager.swift in Sources */,
 				3EDA381522206F7B00E2C539 /* UIColor+Ext.swift in Sources */,
 				3E74B5972223136900C8CC24 /* UserProfileHeader.swift in Sources */,
