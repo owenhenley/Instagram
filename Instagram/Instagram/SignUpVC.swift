@@ -24,7 +24,7 @@ class SignUpVC: UIViewController {
     private let emailTF: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Email"
-        textField.backgroundColor = UIColor(white: 0, alpha: 0.03)
+        textField.backgroundColor = .white
         textField.borderStyle = .roundedRect
         textField.keyboardType = .emailAddress
         textField.addTarget(self, action: #selector(handleTextDidChange), for: .editingChanged)
@@ -34,7 +34,7 @@ class SignUpVC: UIViewController {
     private let usernameTF: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Username"
-        textField.backgroundColor = UIColor(white: 0, alpha: 0.03)
+        textField.backgroundColor = .white
         textField.borderStyle = .roundedRect
         textField.autocapitalizationType = .none
         textField.addTarget(self, action: #selector(handleTextDidChange), for: .editingChanged)
@@ -44,7 +44,7 @@ class SignUpVC: UIViewController {
     private let passwordTF: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Password"
-        textField.backgroundColor = UIColor(white: 0, alpha: 0.03)
+        textField.backgroundColor = .white
         textField.borderStyle = .roundedRect
         textField.isSecureTextEntry = true
         textField.addTarget(self, action: #selector(handleTextDidChange), for: .editingChanged)
@@ -62,6 +62,21 @@ class SignUpVC: UIViewController {
         return signUpButton
     }()
 
+    let alreadyHaveAccountButton: UIButton = {
+        let button = UIButton(type: .system)
+        let attributedTitle = NSMutableAttributedString(string: "Already have an account? ",
+                                                        attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14),
+                                                                     NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        attributedTitle.append(NSAttributedString(string: " Sign In.",
+                                                  attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14),
+                                                               NSAttributedString.Key.foregroundColor: UIColor.rgb(red: 149,
+                                                                                                                   green: 204,
+                                                                                                                   blue: 244)]))
+        button.setAttributedTitle(attributedTitle, for: .normal)
+        button.addTarget(self, action: #selector(handleShowSignIn), for: .touchUpInside)
+        return button
+    }()
+
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,6 +85,10 @@ class SignUpVC: UIViewController {
         layoutViews()
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view,
                                                               action: #selector(UIView.endEditing(_:))))
+    }
+
+    @objc private func handleShowSignIn() {
+        navigationController?.popViewController(animated: true)
     }
 
     @objc private func handleSignUp() {
@@ -83,9 +102,8 @@ class SignUpVC: UIViewController {
 
         AUTH.createUser(withEmail: email, password: password, completion: { (user, error: Error?) in
             if let error = error {
-                print(" Error in File: \(#file), Function: \(#function), Line: \(#line), Message: \(error). \(error.localizedDescription) ")
-                SVProgressHUD.dismiss()
-                return
+                print("Error in File: \(#file), Function: \(#function), Line: \(#line), Message: \(error). \(error.localizedDescription)")
+                return SVProgressHUD.dismiss()
             }
 
             guard let image = self.plusPhotoButton.imageView?.image else { return SVProgressHUD.dismiss() }
@@ -95,31 +113,29 @@ class SignUpVC: UIViewController {
             let storageRef = Storage.storage().reference().child(PROFILE_IMAGES).child(filename)
             storageRef.putData(uploadData, metadata: nil, completion: { (metadata, error) in
                 if let error = error {
-                    print(" Error in File: \(#file), Function: \(#function), Line: \(#line), Message: \(error). \(error.localizedDescription) ")
-                    SVProgressHUD.dismiss()
-                    return
+                    print("Error in File: \(#file), Function: \(#function), Line: \(#line), Message: \(error). \(error.localizedDescription)")
+                    return SVProgressHUD.dismiss()
                 }
 
                 storageRef.downloadURL(completion: { (downloadURL, error) in
                     if let error = error {
-                        print(" Error in File: \(#file), Function: \(#function), Line: \(#line), Message: \(error). \(error.localizedDescription) ")
-                        SVProgressHUD.dismiss()
-                        return
+                        print("Error in File: \(#file), Function: \(#function), Line: \(#line), Message: \(error). \(error.localizedDescription)")
+                        return SVProgressHUD.dismiss()
                     }
 
                     guard let profileImageUrl = downloadURL?.absoluteString else { return SVProgressHUD.dismiss() }
 
-                    guard let uid = user?.user.uid else { return SVProgressHUD.dismiss() }
+                    guard let uid = user?.user.uid else {
+                        return SVProgressHUD.dismiss()
+                    }
 
                     let dictionaryValues = [USERNAME: username, PROFILE_IMAGE_URL: profileImageUrl]
                     let values = [uid: dictionaryValues]
                     Database.database().reference().child(USERS).updateChildValues(values, withCompletionBlock: { (err, ref) in
                         if let error = error {
-                            print(" Error in File: \(#file), Function: \(#function), Line: \(#line), Message: \(error). \(error.localizedDescription) ")
-                            SVProgressHUD.dismiss()
-                            return
+                            print("Error in File: \(#file), Function: \(#function), Line: \(#line), Message: \(error). \(error.localizedDescription)")
+                            return SVProgressHUD.dismiss()
                         }
-                        print("Successfully saved user info to db")
                         SVProgressHUD.dismiss()
                     })
                 })
@@ -148,7 +164,6 @@ extension SignUpVC: UITextFieldDelegate {
             signUpButton.isEnabled = false
         }
     }
-
 }
 
 extension SignUpVC: UIImagePickerControllerDelegate {
@@ -183,6 +198,13 @@ private extension SignUpVC {
     func layoutViews() {
         layoutAddPhotoButton()
         layoutTextFields()
+
+        view.addSubview(alreadyHaveAccountButton)
+        alreadyHaveAccountButton.snp.makeConstraints { (make) in
+            make.left.right.equalToSuperview()
+            make.bottom.equalToSuperview().inset(16)
+            make.height.equalTo(50)
+        }
     }
 
     func layoutAddPhotoButton() {
@@ -207,6 +229,7 @@ private extension SignUpVC {
             make.top.equalTo(plusPhotoButton.snp.bottom).offset(24)
             make.left.equalToSuperview().inset(50)
             make.right.equalToSuperview().inset(50)
+            make.height.equalTo(200)
         }
     }
 }
