@@ -17,13 +17,14 @@ class UserProfileVC: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView?.backgroundColor = .white
-        fetchAndDisplayUsername()
+        fetchAndDisplayUser()
         setupCollectionViewCells()
+        setupLogOutButton()
     }
 
     // MARK: - Methods
     /// Fetches username and sets navigation title as the username
-    private func fetchAndDisplayUsername() {
+    private func fetchAndDisplayUser() {
         guard let uid = CURRENT_USER else { return }
         DB_REF.child(USERS).child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
             print(snapshot.value ?? "No Value")
@@ -37,6 +38,29 @@ class UserProfileVC: UICollectionViewController {
         }) { (error) in
             print(" Error in File: \(#file), Function: \(#function), Line: \(#line), Message: \(error). \(error.localizedDescription) ")
         }
+    }
+
+    private func setupLogOutButton() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: Icon.Settings, style: .plain, target: self, action: #selector(handleLogOut))
+    }
+
+    @objc private func handleLogOut() {
+        let alert = UIAlertController(title: "Are you sure you want to log out?", message: nil, preferredStyle: .actionSheet)
+        let logOutAction = UIAlertAction(title: "Log Out", style: .destructive, handler: { (_) in
+            print("performing log out")
+            do {
+                try AUTH.signOut()
+                // self.present(SignUpVC, animated: true, completion: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
+            } catch {
+                print("Error in File: \(#file), Function: \(#function), Line: \(#line), Message: \(error). \(error.localizedDescription)")
+            }
+        })
+
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alert.addAction(logOutAction)
+
+        alert.preferredAction = logOutAction
+        present(alert, animated: true)
     }
 }
 

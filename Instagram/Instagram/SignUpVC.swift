@@ -65,6 +65,7 @@ class SignUpVC: UIViewController {
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         view.addSubview(plusPhotoButton)
         layoutViews()
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view,
@@ -203,10 +204,9 @@ private extension SignUpVC {
 
         view.addSubview(stackView)
         stackView.snp.makeConstraints { (make) in
-            make.top.equalTo(plusPhotoButton.snp.bottom).inset(24)
+            make.top.equalTo(plusPhotoButton.snp.bottom).offset(24)
             make.left.equalToSuperview().inset(50)
             make.right.equalToSuperview().inset(50)
-            // make.bottom.equalToSuperview()
         }
     }
 }
