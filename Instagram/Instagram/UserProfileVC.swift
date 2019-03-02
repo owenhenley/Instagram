@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import SVProgressHUD
 
 class UserProfileVC: UICollectionViewController {
 
@@ -25,7 +26,7 @@ class UserProfileVC: UICollectionViewController {
     // MARK: - Methods
     /// Fetches username and sets navigation title as the username
     private func fetchAndDisplayUser() {
-        guard let uid = CURRENT_USER else { return }
+        guard let uid = UID else { return }
         DB_REF.child(USERS).child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
             print(snapshot.value ?? "No Value")
 
@@ -35,8 +36,10 @@ class UserProfileVC: UICollectionViewController {
 
             self.navigationItem.title = self.user?.username
             self.collectionView.reloadData()
+            SVProgressHUD.dismiss()
         }) { (error) in
             print(" Error in File: \(#file), Function: \(#function), Line: \(#line), Message: \(error). \(error.localizedDescription) ")
+            SVProgressHUD.dismiss()
         }
     }
 
@@ -50,9 +53,12 @@ class UserProfileVC: UICollectionViewController {
             print("performing log out")
             do {
                 try AUTH.signOut()
-                // self.present(SignUpVC, animated: true, completion: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
+                let loginVC = UINavigationController(rootViewController: LoginVC())
+                self.present(loginVC, animated: true)
+                SVProgressHUD.dismiss()
             } catch {
                 print("Error in File: \(#file), Function: \(#function), Line: \(#line), Message: \(error). \(error.localizedDescription)")
+                SVProgressHUD.dismiss()
             }
         })
 

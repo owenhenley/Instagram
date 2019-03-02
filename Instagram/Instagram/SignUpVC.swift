@@ -27,6 +27,7 @@ class SignUpVC: UIViewController {
         textField.backgroundColor = .white
         textField.borderStyle = .roundedRect
         textField.keyboardType = .emailAddress
+        textField.autocapitalizationType = .none
         textField.addTarget(self, action: #selector(handleTextDidChange), for: .editingChanged)
         return textField
     }()
@@ -67,7 +68,7 @@ class SignUpVC: UIViewController {
         let attributedTitle = NSMutableAttributedString(string: "Already have an account? ",
                                                         attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14),
                                                                      NSAttributedString.Key.foregroundColor: UIColor.lightGray])
-        attributedTitle.append(NSAttributedString(string: " Sign In.",
+        attributedTitle.append(NSAttributedString(string: " Sign In",
                                                   attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14),
                                                                NSAttributedString.Key.foregroundColor: UIColor.rgb(red: 149,
                                                                                                                    green: 204,
@@ -83,8 +84,7 @@ class SignUpVC: UIViewController {
         view.backgroundColor = .white
         view.addSubview(plusPhotoButton)
         layoutViews()
-        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view,
-                                                              action: #selector(UIView.endEditing(_:))))
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
     }
 
     @objc private func handleShowSignIn() {
@@ -141,6 +141,8 @@ class SignUpVC: UIViewController {
                 })
             })
             self.view.endEditing(true) // resign keyboard
+            mainTabController?.setupViewControllers()
+            self.dismiss(animated: true)
         })
     }
 

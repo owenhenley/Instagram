@@ -13,10 +13,14 @@ import Firebase
 let AUTH = Auth.auth()
 let DB = Database.database()
 let DB_REF = Database.database().reference()
-let CURRENT_USER = Auth.auth().currentUser?.uid
+let CURRENT_USER = Auth.auth().currentUser
+let UID = Auth.auth().currentUser?.uid
 
 //Data
 let USERS = "users"
 let PROFILE_IMAGES = "profile_images"
 let USERNAME = "username"
 let PROFILE_IMAGE_URL = "profileImageUrl"
+
+// Dependencies
+let mainTabController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController

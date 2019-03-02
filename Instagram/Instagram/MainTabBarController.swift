@@ -13,30 +13,31 @@ import SVProgressHUD
 class MainTabBarController: UITabBarController {
 
     private let collectionViewLayout = UICollectionViewFlowLayout()
-    private lazy var userProfileVC = UserProfileVC(collectionViewLayout: collectionViewLayout)
-    private lazy var navController = UINavigationController(rootViewController: userProfileVC)
-    private lazy var loginVC = LoginVC()
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         checkUserAuthState()
-        setupTabBar()
+        setupViewControllers()
     }
 
-    private func setupTabBar() {
+    func setupViewControllers() {
         tabBar.tintColor = .black
+        let userProfileVC = UserProfileVC(collectionViewLayout: collectionViewLayout)
+        let navController = UINavigationController(rootViewController: userProfileVC)
 
         navController.tabBarItem.image = Icon.ProfileUnselected
         navController.tabBarItem.selectedImage = Icon.ProfileSelected
-
+        
         viewControllers = [
-            navController
+            navController,
+            UIViewController()
         ]
     }
 
     private func checkUserAuthState() {
         if CURRENT_USER == nil {
+            let loginVC = LoginVC()
             let navController = UINavigationController(rootViewController: loginVC)
             DispatchQueue.main.async {
                 self.present(navController, animated: true)

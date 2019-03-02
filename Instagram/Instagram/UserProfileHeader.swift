@@ -143,6 +143,7 @@ class UserProfileHeader: UICollectionViewCell {
                     SVProgressHUD.dismiss()
                 }
             }.resume()
+            SVProgressHUD.dismiss()
         }
     }
 }

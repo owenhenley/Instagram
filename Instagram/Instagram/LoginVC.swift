@@ -13,6 +13,10 @@ import SVProgressHUD
 
 class LoginVC: UIViewController {
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+
     let logoImageView = UIImageView(image: Icon.LogoWhite)
     let logoContainerView: UIView = {
         let view = UIView()
@@ -27,6 +31,7 @@ class LoginVC: UIViewController {
         textField.borderStyle = .roundedRect
         textField.keyboardType = .emailAddress
         textField.addTarget(self, action: #selector(handleTextDidChange), for: .editingChanged)
+        textField.autocapitalizationType = .none
         return textField
     }()
 
@@ -46,7 +51,7 @@ class LoginVC: UIViewController {
         signUpButton.backgroundColor = UIColor.rgb(red: 149, green: 204, blue: 244)
         signUpButton.layer.cornerRadius = 4
         signUpButton.setTitleColor(.white, for: .normal)
-        // signUpButton.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
+        signUpButton.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
         signUpButton.isEnabled = false
         return signUpButton
     }()
@@ -56,7 +61,7 @@ class LoginVC: UIViewController {
         let attributedTitle = NSMutableAttributedString(string: "Don't have an account? ",
                                                         attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14),
                                                                      NSAttributedString.Key.foregroundColor: UIColor.lightGray])
-        attributedTitle.append(NSAttributedString(string: " Sign Up.",
+        attributedTitle.append(NSAttributedString(string: " Sign Up",
                                                   attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14),
                                                                NSAttributedString.Key.foregroundColor: UIColor.rgb(red: 149,
                                                                                                                    green: 204,
@@ -70,11 +75,26 @@ class LoginVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         navigationController?.isNavigationBarHidden = true
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
         layoutViews()
     }
 
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+    @objc private func handleLogin() {
+        guard let email = emailTF.text, !email.isEmpty,
+            let password = passwordTF.text, !password.isEmpty
+            else {
+                return
+        }
+
+        AUTH.signIn(withEmail: email, password: password) { (user, error) in
+            if let error = error {
+                print("Error in File: \(#file), Function: \(#function), Line: \(#line), Message: \(error). \(error.localizedDescription)")
+            }
+
+            print("logged in!")
+            mainTabController!.setupViewControllers()
+            self.dismiss(animated: true)
+        }
     }
 
     @objc private func handleShowSignUp() {
@@ -135,11 +155,11 @@ extension LoginVC: UITextFieldDelegate {
             passwordTF.text != ""
 
         if formIsValid {
-            signUpButton.backgroundColor = UIColor.rgb(red: 17, green: 154, blue: 237)
-            signUpButton.isEnabled = true
+            loginButton.backgroundColor = UIColor.rgb(red: 17, green: 154, blue: 237)
+            loginButton.isEnabled = true
         } else {
-            signUpButton.backgroundColor = UIColor.rgb(red: 149, green: 204, blue: 244)
-            signUpButton.isEnabled = false
+            loginButton.backgroundColor = UIColor.rgb(red: 149, green: 204, blue: 244)
+            loginButton.isEnabled = false
         }
     }
 }
