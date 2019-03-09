@@ -13,7 +13,7 @@ struct User {
     let profileImageUrl: String
 
     init(dictionary: [String : Any]) {
-        self.username = dictionary[USERNAME] as? String ?? ""
-        self.profileImageUrl = dictionary[PROFILE_IMAGE_URL] as? String ?? ""
+        self.username = dictionary[dict.username] as? String ?? ""
+        self.profileImageUrl = dictionary[dict.profileImageUrl] as? String ?? ""
     }
 }

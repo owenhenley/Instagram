@@ -37,7 +37,7 @@ class MainTabBarController: UITabBarController {
 
     /// Checks if the user is currently signed in
     private func checkUserAuthState() {
-        if CURRENT_USER == nil {
+        if currentUser == nil {
             DispatchQueue.main.async {
                 let loginVC = LoginVC()
                 let navController = UINavigationController(rootViewController: loginVC)

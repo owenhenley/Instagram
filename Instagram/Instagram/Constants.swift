@@ -10,17 +10,19 @@ import UIKit
 import Firebase
 
 // Firebase
-let AUTH = Auth.auth()
-let DB = Database.database()
-let DB_REF = Database.database().reference()
-let CURRENT_USER = Auth.auth().currentUser
-let UID = Auth.auth().currentUser?.uid
+let auth = Auth.auth()
+let db = Database.database()
+let dbRef = Database.database().reference()
+let currentUser = Auth.auth().currentUser
+let uid = Auth.auth().currentUser?.uid
 
-//Data
-let USERS = "users"
-let PROFILE_IMAGES = "profile_images"
-let USERNAME = "username"
-let PROFILE_IMAGE_URL = "profileImageUrl"
+// Firebase Dictionary Strings
+struct dict {
+   static let users = "users"
+   static let profileImages = "profile_images"
+   static let username = "username"
+   static let profileImageUrl = "profileImageUrl"
+}
 
 // Dependencies
-// let mainTabBarControlxler = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController
+let mainTabBarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController

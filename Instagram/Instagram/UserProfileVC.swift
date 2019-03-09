@@ -18,7 +18,7 @@ class UserProfileVC: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView?.backgroundColor = .white
-        navigationItem.title = UID // This is needed to fetch the user details, I still don't understnd why...
+        navigationItem.title = uid // This is needed to fetch the user details, I still don't understnd why...
         fetchAndDisplayUser()
         setupCollectionViewCells()
         setupLogOutButton()
@@ -27,8 +27,8 @@ class UserProfileVC: UICollectionViewController {
     // MARK: - Methods
     /// Fetches username and sets navigation title as the username
     private func fetchAndDisplayUser() {
-        guard let uid = UID else { return }
-        DB_REF.child(USERS).child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+        guard let uid = uid else { return }
+        dbRef.child(dict.users).child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
             print(snapshot.value ?? "No Value")
 
             guard let dictionary = snapshot.value as? [String : Any] else { return }
@@ -53,7 +53,7 @@ class UserProfileVC: UICollectionViewController {
         let logOutAction = UIAlertAction(title: "Log Out", style: .destructive, handler: { (_) in
             print("performing log out")
             do {
-                try AUTH.signOut()
+                try auth.signOut()
                 let loginVC = LoginVC()
                 let navController = UINavigationController(rootViewController:loginVC)
                 self.present(navController, animated: true)

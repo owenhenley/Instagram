@@ -90,13 +90,13 @@ class LoginVC: UIViewController {
                 return
         }
 
-        AUTH.signIn(withEmail: email, password: password) { (user, error) in
+        auth.signIn(withEmail: email, password: password) { (user, error) in
             if let error = error {
                 print("Error in File: \(#file), Function: \(#function), Line: \(#line), Message: \(error). \(error.localizedDescription)")
             }
 
             print("logged in!")
-            guard let mainTabBarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else { return }
+            guard let mainTabBarController = mainTabBarController else { return }
             mainTabBarController.setupViewControllers()
             self.dismiss(animated: true)
         }

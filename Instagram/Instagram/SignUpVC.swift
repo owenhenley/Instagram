@@ -98,7 +98,7 @@ class SignUpVC: UIViewController {
                 return
         }
 
-        AUTH.createUser(withEmail: email, password: password, completion: { (user, error: Error?) in
+        auth.createUser(withEmail: email, password: password, completion: { (user, error: Error?) in
             if let error = error {
                 print("Error in File: \(#file), Function: \(#function), Line: \(#line), Message: \(error). \(error.localizedDescription)")
                 return
@@ -108,7 +108,7 @@ class SignUpVC: UIViewController {
             guard let uploadData = image.jpegData(compressionQuality: 0.3) else { return }
 
             let filename = NSUUID().uuidString
-            let storageRef = Storage.storage().reference().child(PROFILE_IMAGES).child(filename)
+            let storageRef = Storage.storage().reference().child(dict.profileImages).child(filename)
             storageRef.putData(uploadData, metadata: nil, completion: { (metadata, error) in
                 if let error = error {
                     print("Error in File: \(#file), Function: \(#function), Line: \(#line), Message: \(error). \(error.localizedDescription)")
@@ -127,9 +127,9 @@ class SignUpVC: UIViewController {
                         return
                     }
 
-                    let dictionaryValues = [USERNAME: username, PROFILE_IMAGE_URL: profileImageUrl]
+                    let dictionaryValues = [username: username, profileImageUrl: profileImageUrl]
                     let values = [uid: dictionaryValues]
-                    Database.database().reference().child(USERS).updateChildValues(values, withCompletionBlock: { (err, ref) in
+                    dbRef.child(dict.users).updateChildValues(values, withCompletionBlock: { (err, ref) in
                         if let error = error {
                             print("Error in File: \(#file), Function: \(#function), Line: \(#line), Message: \(error). \(error.localizedDescription)")
                             return
@@ -138,7 +138,7 @@ class SignUpVC: UIViewController {
                 })
             })
             self.view.endEditing(true) // resign keyboard
-            guard let mainTabBarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else { return }
+            guard let mainTabBarController = mainTabBarController else { return }
             mainTabBarController.setupViewControllers()
             self.dismiss(animated: true)
         })
