@@ -8,11 +8,8 @@
 
 import UIKit
 import Firebase
-import SVProgressHUD
 
 class MainTabBarController: UITabBarController {
-
-    private let collectionViewLayout = UICollectionViewFlowLayout()
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -21,8 +18,11 @@ class MainTabBarController: UITabBarController {
         setupViewControllers()
     }
 
+    /// Sets up the TabBar with associated view controllers
+    /// and lays out the correct icons
     func setupViewControllers() {
         tabBar.tintColor = .black
+        let collectionViewLayout = UICollectionViewFlowLayout()
         let userProfileVC = UserProfileVC(collectionViewLayout: collectionViewLayout)
         let navController = UINavigationController(rootViewController: userProfileVC)
 
@@ -35,13 +35,13 @@ class MainTabBarController: UITabBarController {
         ]
     }
 
+    /// Checks if the user is currently signed in
     private func checkUserAuthState() {
         if CURRENT_USER == nil {
-            let loginVC = LoginVC()
-            let navController = UINavigationController(rootViewController: loginVC)
             DispatchQueue.main.async {
+                let loginVC = LoginVC()
+                let navController = UINavigationController(rootViewController: loginVC)
                 self.present(navController, animated: true)
-                SVProgressHUD.dismiss()
             }
             return
         }

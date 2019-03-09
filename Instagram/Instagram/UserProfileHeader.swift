@@ -9,7 +9,6 @@
 import UIKit
 import Firebase
 import SnapKit
-import SVProgressHUD
 
 class UserProfileHeader: UICollectionViewCell {
 
@@ -22,8 +21,14 @@ class UserProfileHeader: UICollectionViewCell {
     }
 
     // MARK: - Controls
-    lazy var statsStackView = UIStackView(arrangedSubviews: [postsLabel, followersLabel, followingLabel])
-    lazy var toolbarStackView = UIStackView(arrangedSubviews: [gridButton, listButton, bookmarksButton])
+    lazy var statsStackView = UIStackView(arrangedSubviews: [postsLabel,
+                                                             followersLabel,
+                                                             followingLabel
+        ])
+    lazy var toolbarStackView = UIStackView(arrangedSubviews: [gridButton,
+                                                               listButton,
+                                                               bookmarksButton
+        ])
     
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
@@ -122,34 +127,30 @@ class UserProfileHeader: UICollectionViewCell {
     }
 
     // MARK: - Methods
+    /// Fetch the users details and display them on screen
     private func fetchAndSetProfileImage() {
-        if profileImageView.image == nil {
-            SVProgressHUD.show()
-            guard let profileImageUrl = user?.profileImageUrl else { return }
-            guard let url = URL(string: profileImageUrl) else { return }
+        guard let profileImageUrl = user?.profileImageUrl else { return }
+        guard let url = URL(string: profileImageUrl) else { return }
 
-            URLSession.shared.dataTask(with: url) { (data, response, error) in
-                if let error = error {
-                    print("Error in File: \(#file), Function: \(#function), Line: \(#line), Message: \(error). \(error.localizedDescription)")
-                    return
-                }
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if let error = error {
+                print("Error in File: \(#file), Function: \(#function), Line: \(#line), Message: \(error). \(error.localizedDescription)")
+                return
+            }
 
-                guard let data = data else { return }
+            guard let data = data else { return }
 
-                let image = UIImage(data: data)
+            let image = UIImage(data: data)
 
-                DispatchQueue.main.async {
-                    self.profileImageView.image = image
-                    SVProgressHUD.dismiss()
-                }
-            }.resume()
-            SVProgressHUD.dismiss()
-        }
+            DispatchQueue.main.async {
+                self.profileImageView.image = image
+            }
+        }.resume()
     }
 }
 
 // MARK: - Private layout methods
-extension UserProfileHeader {
+private extension UserProfileHeader {
     func layoutViews() {
         layoutProfileImageView()
         layoutToolbar()
@@ -166,7 +167,6 @@ extension UserProfileHeader {
             make.size.equalTo(80)
         }
     }
-
 
     func layoutUsernameLabel() {
         addSubview(usernameLabel)

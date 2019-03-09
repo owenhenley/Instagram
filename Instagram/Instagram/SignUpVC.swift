@@ -8,7 +8,6 @@
 
 import UIKit
 import Firebase
-import SVProgressHUD
 import SnapKit
 
 class SignUpVC: UIViewController {
@@ -82,17 +81,16 @@ class SignUpVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        view.addSubview(plusPhotoButton)
         layoutViews()
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
     }
 
+    // MARK: - #selector Methods
     @objc private func handleShowSignIn() {
         navigationController?.popViewController(animated: true)
     }
 
     @objc private func handleSignUp() {
-        SVProgressHUD.show()
         guard let email = emailTF.text, email != "",
             let username = usernameTF.text, username != "",
             let password = passwordTF.text, password != "" else {
@@ -103,30 +101,30 @@ class SignUpVC: UIViewController {
         AUTH.createUser(withEmail: email, password: password, completion: { (user, error: Error?) in
             if let error = error {
                 print("Error in File: \(#file), Function: \(#function), Line: \(#line), Message: \(error). \(error.localizedDescription)")
-                return SVProgressHUD.dismiss()
+                return
             }
 
-            guard let image = self.plusPhotoButton.imageView?.image else { return SVProgressHUD.dismiss() }
-            guard let uploadData = image.jpegData(compressionQuality: 0.3) else { return SVProgressHUD.dismiss() }
+            guard let image = self.plusPhotoButton.imageView?.image else { return }
+            guard let uploadData = image.jpegData(compressionQuality: 0.3) else { return }
 
             let filename = NSUUID().uuidString
             let storageRef = Storage.storage().reference().child(PROFILE_IMAGES).child(filename)
             storageRef.putData(uploadData, metadata: nil, completion: { (metadata, error) in
                 if let error = error {
                     print("Error in File: \(#file), Function: \(#function), Line: \(#line), Message: \(error). \(error.localizedDescription)")
-                    return SVProgressHUD.dismiss()
+                    return
                 }
 
                 storageRef.downloadURL(completion: { (downloadURL, error) in
                     if let error = error {
                         print("Error in File: \(#file), Function: \(#function), Line: \(#line), Message: \(error). \(error.localizedDescription)")
-                        return SVProgressHUD.dismiss()
+                        return
                     }
 
-                    guard let profileImageUrl = downloadURL?.absoluteString else { return SVProgressHUD.dismiss() }
+                    guard let profileImageUrl = downloadURL?.absoluteString else { return }
 
                     guard let uid = user?.user.uid else {
-                        return SVProgressHUD.dismiss()
+                        return
                     }
 
                     let dictionaryValues = [USERNAME: username, PROFILE_IMAGE_URL: profileImageUrl]
@@ -134,24 +132,26 @@ class SignUpVC: UIViewController {
                     Database.database().reference().child(USERS).updateChildValues(values, withCompletionBlock: { (err, ref) in
                         if let error = error {
                             print("Error in File: \(#file), Function: \(#function), Line: \(#line), Message: \(error). \(error.localizedDescription)")
-                            return SVProgressHUD.dismiss()
+                            return
                         }
-                        SVProgressHUD.dismiss()
                     })
                 })
             })
             self.view.endEditing(true) // resign keyboard
-            mainTabController?.setupViewControllers()
+            guard let mainTabBarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else { return }
+            mainTabBarController.setupViewControllers()
             self.dismiss(animated: true)
         })
     }
 
 }
 
+// MARK: - UIGestureRecognizerDelegate
 extension SignUpVC: UIGestureRecognizerDelegate {
-
+    // No Code
 }
 
+// MARK: - UITextFieldDelegate
 extension SignUpVC: UITextFieldDelegate {
     @objc private func handleTextDidChange() {
         let formIsValid = emailTF.text != "" &&
@@ -168,6 +168,7 @@ extension SignUpVC: UITextFieldDelegate {
     }
 }
 
+// MARK: - UIImagePickerControllerDelegate
 extension SignUpVC: UIImagePickerControllerDelegate {
     @objc private func handleAddPhoto() {
         let imagePickerController = UIImagePickerController()
@@ -192,24 +193,21 @@ extension SignUpVC: UIImagePickerControllerDelegate {
     }
 }
 
+// MARK: - UINavigationControllerDelegate
 extension SignUpVC: UINavigationControllerDelegate {
     // No Code
 }
 
+// MARK: - Layout Views
 private extension SignUpVC {
     func layoutViews() {
         layoutAddPhotoButton()
         layoutTextFields()
-
-        view.addSubview(alreadyHaveAccountButton)
-        alreadyHaveAccountButton.snp.makeConstraints { (make) in
-            make.left.right.equalToSuperview()
-            make.bottom.equalToSuperview().inset(16)
-            make.height.equalTo(50)
-        }
+        layoutAlreadyHaveAccountButton()
     }
 
     func layoutAddPhotoButton() {
+        view.addSubview(plusPhotoButton)
         plusPhotoButton.snp.makeConstraints { (make) in
             make.top.equalTo(view.snp.top).inset(100)
             make.size.equalTo(140)
@@ -232,6 +230,15 @@ private extension SignUpVC {
             make.left.equalToSuperview().inset(50)
             make.right.equalToSuperview().inset(50)
             make.height.equalTo(200)
+        }
+    }
+
+    func layoutAlreadyHaveAccountButton() {
+        view.addSubview(alreadyHaveAccountButton)
+        alreadyHaveAccountButton.snp.makeConstraints { (make) in
+            make.left.right.equalToSuperview()
+            make.bottom.equalToSuperview().inset(16)
+            make.height.equalTo(50)
         }
     }
 }

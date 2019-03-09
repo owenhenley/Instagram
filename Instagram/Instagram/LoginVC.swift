@@ -9,14 +9,15 @@
 import UIKit
 import SnapKit
 import Firebase
-import SVProgressHUD
 
 class LoginVC: UIViewController {
 
+    // MARK: - Properties
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
 
+    // MARK: - Controls
     let logoImageView = UIImageView(image: Icon.LogoWhite)
     let logoContainerView: UIView = {
         let view = UIView()
@@ -71,6 +72,7 @@ class LoginVC: UIViewController {
         return button
     }()
 
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -79,6 +81,8 @@ class LoginVC: UIViewController {
         layoutViews()
     }
 
+    // MARK: - #selector Methods
+    /// Handles what happens when the user signs in
     @objc private func handleLogin() {
         guard let email = emailTF.text, !email.isEmpty,
             let password = passwordTF.text, !password.isEmpty
@@ -92,29 +96,46 @@ class LoginVC: UIViewController {
             }
 
             print("logged in!")
-            mainTabController!.setupViewControllers()
+            guard let mainTabBarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else { return }
+            mainTabBarController.setupViewControllers()
             self.dismiss(animated: true)
         }
     }
 
+
+    /// Handles what happens if the user wants to sign up
     @objc private func handleShowSignUp() {
         let signUpVC = SignUpVC()
         navigationController?.pushViewController(signUpVC, animated: true)
     }
+}
 
-    private func layoutViews() {
-        layoutLogo()
-        layoutTextFields()
+// MARK: - UITextFieldDelegate
+extension LoginVC: UITextFieldDelegate {
+    /// Change Login button interaction based on user input
+    @objc private func handleTextDidChange() {
+        let formIsValid = emailTF.text != "" &&
+            passwordTF.text != ""
 
-        view.addSubview(signUpButton)
-        signUpButton.snp.makeConstraints { (make) in
-            make.left.right.equalToSuperview()
-            make.bottom.equalToSuperview().inset(16)
-            make.height.equalTo(50)
+        if formIsValid {
+            loginButton.backgroundColor = UIColor.rgb(red: 17, green: 154, blue: 237)
+            loginButton.isEnabled = true
+        } else {
+            loginButton.backgroundColor = UIColor.rgb(red: 149, green: 204, blue: 244)
+            loginButton.isEnabled = false
         }
     }
+}
 
-    private func layoutLogo() {
+// MARK: - Layout Views
+private extension LoginVC {
+    func layoutViews() {
+        layoutLogo()
+        layoutTextFields()
+        layoutSignupButton()
+    }
+
+    func layoutLogo() {
         view.addSubview(logoContainerView)
         logoContainerView.snp.makeConstraints { (make) in
             let height = view.frame.height / 4
@@ -131,7 +152,7 @@ class LoginVC: UIViewController {
         }
     }
 
-    private func layoutTextFields() {
+    func layoutTextFields() {
         let stackView = UIStackView(arrangedSubviews: [emailTF,
                                                        passwordTF,
                                                        loginButton])
@@ -147,19 +168,14 @@ class LoginVC: UIViewController {
             make.height.equalTo(140)
         }
     }
-}
 
-extension LoginVC: UITextFieldDelegate {
-    @objc private func handleTextDidChange() {
-        let formIsValid = emailTF.text != "" &&
-            passwordTF.text != ""
-
-        if formIsValid {
-            loginButton.backgroundColor = UIColor.rgb(red: 17, green: 154, blue: 237)
-            loginButton.isEnabled = true
-        } else {
-            loginButton.backgroundColor = UIColor.rgb(red: 149, green: 204, blue: 244)
-            loginButton.isEnabled = false
+    func layoutSignupButton() {
+        view.addSubview(signUpButton)
+        signUpButton.snp.makeConstraints { (make) in
+            make.left.right.equalToSuperview()
+            make.bottom.equalToSuperview().inset(16)
+            make.height.equalTo(50)
         }
     }
 }
+

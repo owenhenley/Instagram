@@ -8,7 +8,6 @@
 
 import UIKit
 import Firebase
-import SVProgressHUD
 
 class FirebaseManager {
     

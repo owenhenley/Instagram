@@ -8,16 +8,17 @@
 
 import UIKit
 import Firebase
-import SVProgressHUD
 
 class UserProfileVC: UICollectionViewController {
 
+    // MARK: - Properties
     private var user: User?
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView?.backgroundColor = .white
+        navigationItem.title = UID // This is needed to fetch the user details, I still don't understnd why...
         fetchAndDisplayUser()
         setupCollectionViewCells()
         setupLogOutButton()
@@ -36,29 +37,28 @@ class UserProfileVC: UICollectionViewController {
 
             self.navigationItem.title = self.user?.username
             self.collectionView.reloadData()
-            SVProgressHUD.dismiss()
         }) { (error) in
-            print(" Error in File: \(#file), Function: \(#function), Line: \(#line), Message: \(error). \(error.localizedDescription) ")
-            SVProgressHUD.dismiss()
+            print("Error in File: \(#file), Function: \(#function), Line: \(#line), Message: \(error). \(error.localizedDescription)")
         }
     }
 
+    /// Sets up the Log Out Button
     private func setupLogOutButton() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: Icon.Settings, style: .plain, target: self, action: #selector(handleLogOut))
     }
 
+    /// Handles what happnens when the user taps to sign out
     @objc private func handleLogOut() {
         let alert = UIAlertController(title: "Are you sure you want to log out?", message: nil, preferredStyle: .actionSheet)
         let logOutAction = UIAlertAction(title: "Log Out", style: .destructive, handler: { (_) in
             print("performing log out")
             do {
                 try AUTH.signOut()
-                let loginVC = UINavigationController(rootViewController: LoginVC())
-                self.present(loginVC, animated: true)
-                SVProgressHUD.dismiss()
+                let loginVC = LoginVC()
+                let navController = UINavigationController(rootViewController:loginVC)
+                self.present(navController, animated: true)
             } catch {
                 print("Error in File: \(#file), Function: \(#function), Line: \(#line), Message: \(error). \(error.localizedDescription)")
-                SVProgressHUD.dismiss()
             }
         })
 
@@ -72,6 +72,7 @@ class UserProfileVC: UICollectionViewController {
 
 // MARK: - UICollectionView
 extension UserProfileVC {
+    /// Registers the CollectionViewCells ready to use.
     private func setupCollectionViewCells() {
         collectionView.register(UserProfileHeader.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
@@ -110,6 +111,7 @@ extension UserProfileVC {
     }
 }
 
+// MARK: - UICollectionViewDelegateFlowLayout
 extension UserProfileVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: view.frame.width, height: 200)

@@ -23,4 +23,4 @@ let USERNAME = "username"
 let PROFILE_IMAGE_URL = "profileImageUrl"
 
 // Dependencies
-let mainTabController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController
+// let mainTabBarControlxler = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController
