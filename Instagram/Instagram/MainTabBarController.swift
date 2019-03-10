@@ -14,6 +14,7 @@ class MainTabBarController: UITabBarController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.delegate = self
         checkUserAuthState()
         setupViewControllers()
     }
@@ -34,27 +35,23 @@ class MainTabBarController: UITabBarController {
     /// and lays out the correct icons
     func setupViewControllers() {
         // Home
-        let homeVC = addNavController(UIViewController(),
-                                      unselectedIcon: TabBarIcon.HomeUnselected,
+        let homeVC = addNavController(unselectedIcon: TabBarIcon.HomeUnselected,
                                       selectedIcon: TabBarIcon.HomeSelected)
 
         // Search
-        let searchVC = addNavController(UIViewController(),
-                                        unselectedIcon: TabBarIcon.SearchUnselected,
+        let searchVC = addNavController(unselectedIcon: TabBarIcon.SearchUnselected,
                                         selectedIcon: TabBarIcon.SearchSelected)
         // Add Photo
-        let addPhotoVC = addNavController(UIViewController(),
-                                        unselectedIcon: TabBarIcon.PlusUnselected,
-                                        selectedIcon: nil)
+        let addPhotoVC = addNavController(unselectedIcon: TabBarIcon.PlusUnselected,
+                                          selectedIcon: nil)
         // Likes
-        let likesVC = addNavController(UIViewController(),
-                                        unselectedIcon: TabBarIcon.HeartUnselected,
+        let likesVC = addNavController(unselectedIcon: TabBarIcon.HeartUnselected,
                                         selectedIcon: TabBarIcon.HeartSelected)
 
         // User Profile
-        let userProfileVC = addNavController(UserProfileVC(collectionViewLayout: UICollectionViewFlowLayout()),
-                                             unselectedIcon: TabBarIcon.ProfileUnselected,
-                                             selectedIcon: TabBarIcon.ProfileSelected)
+        let userProfileVC = addNavController(unselectedIcon: TabBarIcon.ProfileUnselected,
+                                             selectedIcon: TabBarIcon.ProfileSelected,
+                                             rootViewController: UserProfileVC(collectionViewLayout: UICollectionViewFlowLayout()))
 
         // TabBar ViewControllers
         tabBar.tintColor = .black
@@ -63,21 +60,45 @@ class MainTabBarController: UITabBarController {
                            addPhotoVC,
                            likesVC,
                            userProfileVC]
-        customiseTabBar()
+        customiseTabBarInsets()
     }
 
-    private func addNavController(_ rootViewController: UIViewController, unselectedIcon: UIImage, selectedIcon: UIImage?) -> UINavigationController {
-        let navController = UINavigationController(rootViewController: rootViewController)
+    /// Adds a rootViewController to a navigationController with it's unselected and selected tab bar icons.
+    ///
+    /// - Parameters:
+    ///   - unselectedIcon: The unselected tabBar icon
+    ///   - selectedIcon?: The selected tabBar icon
+    ///   - rootViewController: The view controller to set as the root
+    /// - Returns: a new `UINavigationController`, to be passed into the tabBar's `viewControllers` array
+    private func addNavController(unselectedIcon: UIImage, selectedIcon: UIImage?, rootViewController: UIViewController = UIViewController()) -> UINavigationController {
+        let viewController = rootViewController
+        let navController = UINavigationController(rootViewController: viewController)
         navController.tabBarItem.image = unselectedIcon
         navController.tabBarItem.selectedImage = selectedIcon
         return navController
     }
 
-    private func customiseTabBar() {
+    /// Centers the TabBar's veritcal alignment
+    private func customiseTabBarInsets() {
         guard let items = tabBar.items else { return }
 
         for item in items {
             item.imageInsets = UIEdgeInsets(top: 4, left: 0, bottom: -4, right: 0)
         }
+    }
+}
+
+extension MainTabBarController: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        let index = viewControllers?.firstIndex(of: viewController)
+        let addPhotoIndex = 2
+        if index == addPhotoIndex {
+            let flowLayout = UICollectionViewFlowLayout()
+            let photoSelectorVC = PhotoSelectorVC(collectionViewLayout: flowLayout)
+            let navController = UINavigationController(rootViewController: photoSelectorVC)
+            present(navController, animated: true)
+            return false
+        }
+        return true
     }
 }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E40ACFF22354FB5003AD989 /* PhotoSelectorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E40ACFE22354FB5003AD989 /* PhotoSelectorVC.swift */; };
+		3E40AD012235653F003AD989 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E40AD002235653F003AD989 /* CollectionViewController.swift */; };
 		3E74B5972223136900C8CC24 /* UserProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E74B5962223136900C8CC24 /* UserProfileHeader.swift */; };
 		3E74B5992223191400C8CC24 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E74B5982223191400C8CC24 /* FirebaseManager.swift */; };
 		3E74B59B22231A0800C8CC24 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E74B59A22231A0800C8CC24 /* User.swift */; };
@@ -26,6 +28,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3E40ACFE22354FB5003AD989 /* PhotoSelectorVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorVC.swift; sourceTree = "<group>"; };
+		3E40AD002235653F003AD989 /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		3E74B5962223136900C8CC24 /* UserProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileHeader.swift; sourceTree = "<group>"; };
 		3E74B5982223191400C8CC24 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		3E74B59A22231A0800C8CC24 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -115,6 +119,8 @@
 				3EA837022221D6A300F93BF2 /* MainTabBarController.swift */,
 				3EA837042221D78E00F93BF2 /* UserProfileVC.swift */,
 				3EDE5E832225E01B001259F7 /* LoginVC.swift */,
+				3E40ACFE22354FB5003AD989 /* PhotoSelectorVC.swift */,
+				3E40AD002235653F003AD989 /* CollectionViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -313,6 +319,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E40AD012235653F003AD989 /* CollectionViewController.swift in Sources */,
 				3EDE5E842225E01B001259F7 /* LoginVC.swift in Sources */,
 				3EA837072221D9D600F93BF2 /* Icons.swift in Sources */,
 				3E74B5992223191400C8CC24 /* FirebaseManager.swift in Sources */,
@@ -321,6 +328,7 @@
 				3EA837032221D6A300F93BF2 /* MainTabBarController.swift in Sources */,
 				3EE318D3221DD55100FEBB2C /* SignUpVC.swift in Sources */,
 				3E820E44221CA51D008124DB /* AppDelegate.swift in Sources */,
+				3E40ACFF22354FB5003AD989 /* PhotoSelectorVC.swift in Sources */,
 				3EA837052221D78E00F93BF2 /* UserProfileVC.swift in Sources */,
 				3EA837092221DFCE00F93BF2 /* Constants.swift in Sources */,
 				3E74B59B22231A0800C8CC24 /* User.swift in Sources */,
