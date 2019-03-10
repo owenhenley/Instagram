@@ -9,18 +9,6 @@
 import UIKit
 
 struct Icon {
-    // Tab Bar
-    static let HomeSelected = UIImage(named: "home_selected")!
-    static let HomeUnselected = UIImage(named: "home_unselected")!
-    static let SearchSelected = UIImage(named: "search_selected")!
-    static let SearchUnselected = UIImage(named: "search_unselected")!
-    static let HeartSelected = UIImage(named: "heart_selected")!
-    static let HeartUnselected = UIImage(named: "heart_unselected")!
-    static let ProfileSelected = UIImage(named: "profile_selected")!
-    static let ProfileUnselected = UIImage(named: "profile_unselected")!
-    static let PlusUnselected = UIImage(named: "plus_unselected")!
-
-    // The Rest
     static let AddPhoto = UIImage(named: "add_photo")!
     static let Camera = UIImage(named: "camera")!
     static let Cancel = UIImage(named: "cancel")!
@@ -35,4 +23,16 @@ struct Icon {
     static let Save = UIImage(named: "save")!
     static let Send = UIImage(named: "send")!
     static let Settings = UIImage(named: "settings")!
+}
+
+struct TabBarIcon {
+    static let HomeSelected = UIImage(named: "home_selected")!
+    static let HomeUnselected = UIImage(named: "home_unselected")!
+    static let SearchSelected = UIImage(named: "search_selected")!
+    static let SearchUnselected = UIImage(named: "search_unselected")!
+    static let HeartSelected = UIImage(named: "heart_selected")!
+    static let HeartUnselected = UIImage(named: "heart_unselected")!
+    static let ProfileSelected = UIImage(named: "profile_selected")!
+    static let ProfileUnselected = UIImage(named: "profile_unselected")!
+    static let PlusUnselected = UIImage(named: "plus_unselected")!
 }

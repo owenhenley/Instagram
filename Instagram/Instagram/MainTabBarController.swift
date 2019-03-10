@@ -18,23 +18,6 @@ class MainTabBarController: UITabBarController {
         setupViewControllers()
     }
 
-    /// Sets up the TabBar with associated view controllers
-    /// and lays out the correct icons
-    func setupViewControllers() {
-        tabBar.tintColor = .black
-        let collectionViewLayout = UICollectionViewFlowLayout()
-        let userProfileVC = UserProfileVC(collectionViewLayout: collectionViewLayout)
-        let navController = UINavigationController(rootViewController: userProfileVC)
-
-        navController.tabBarItem.image = Icon.ProfileUnselected
-        navController.tabBarItem.selectedImage = Icon.ProfileSelected
-        
-        viewControllers = [
-            navController,
-            UIViewController()
-        ]
-    }
-
     /// Checks if the user is currently signed in
     private func checkUserAuthState() {
         if currentUser == nil {
@@ -44,6 +27,57 @@ class MainTabBarController: UITabBarController {
                 self.present(navController, animated: true)
             }
             return
+        }
+    }
+
+    /// Sets up the TabBar with associated view controllers
+    /// and lays out the correct icons
+    func setupViewControllers() {
+        // Home
+        let homeVC = addNavController(UIViewController(),
+                                      unselectedIcon: TabBarIcon.HomeUnselected,
+                                      selectedIcon: TabBarIcon.HomeSelected)
+
+        // Search
+        let searchVC = addNavController(UIViewController(),
+                                        unselectedIcon: TabBarIcon.SearchUnselected,
+                                        selectedIcon: TabBarIcon.SearchSelected)
+        // Add Photo
+        let addPhotoVC = addNavController(UIViewController(),
+                                        unselectedIcon: TabBarIcon.PlusUnselected,
+                                        selectedIcon: nil)
+        // Likes
+        let likesVC = addNavController(UIViewController(),
+                                        unselectedIcon: TabBarIcon.HeartUnselected,
+                                        selectedIcon: TabBarIcon.HeartSelected)
+
+        // User Profile
+        let userProfileVC = addNavController(UserProfileVC(collectionViewLayout: UICollectionViewFlowLayout()),
+                                             unselectedIcon: TabBarIcon.ProfileUnselected,
+                                             selectedIcon: TabBarIcon.ProfileSelected)
+
+        // TabBar ViewControllers
+        tabBar.tintColor = .black
+        viewControllers = [homeVC,
+                           searchVC,
+                           addPhotoVC,
+                           likesVC,
+                           userProfileVC]
+        customiseTabBar()
+    }
+
+    private func addNavController(_ rootViewController: UIViewController, unselectedIcon: UIImage, selectedIcon: UIImage?) -> UINavigationController {
+        let navController = UINavigationController(rootViewController: rootViewController)
+        navController.tabBarItem.image = unselectedIcon
+        navController.tabBarItem.selectedImage = selectedIcon
+        return navController
+    }
+
+    private func customiseTabBar() {
+        guard let items = tabBar.items else { return }
+
+        for item in items {
+            item.imageInsets = UIEdgeInsets(top: 4, left: 0, bottom: -4, right: 0)
         }
     }
 }

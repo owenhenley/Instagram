@@ -93,7 +93,7 @@
 				3EA8370B2221E54600F93BF2 /* Utilities */,
 				3EDA381322206F3800E2C539 /* Extensions */,
 				3E820E33221CA51D008124DB /* Models */,
-				3E820E36221CA51D008124DB /* Controllers */,
+				3E820E3A221CA51D008124DB /* View Controllers */,
 				3E820E3D221CA51D008124DB /* Views */,
 				3E820E42221CA51D008124DB /* Resources */,
 			);
@@ -106,22 +106,6 @@
 				3E74B59A22231A0800C8CC24 /* User.swift */,
 			);
 			name = Models;
-			sourceTree = "<group>";
-		};
-		3E820E36221CA51D008124DB /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				3E820E37221CA51D008124DB /* Model Controllers */,
-				3E820E3A221CA51D008124DB /* View Controllers */,
-			);
-			name = Controllers;
-			sourceTree = "<group>";
-		};
-		3E820E37221CA51D008124DB /* Model Controllers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "Model Controllers";
 			sourceTree = "<group>";
 		};
 		3E820E3A221CA51D008124DB /* View Controllers */ = {
@@ -139,7 +123,6 @@
 			isa = PBXGroup;
 			children = (
 				3E74B5962223136900C8CC24 /* UserProfileHeader.swift */,
-				3E820E3E221CA51D008124DB /* Storyboards */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -156,6 +139,7 @@
 		3E820E42221CA51D008124DB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3E820E3E221CA51D008124DB /* Storyboards */,
 				3E820E45221CA51F008124DB /* Assets.xcassets */,
 				3E820E4A221CA51F008124DB /* Info.plist */,
 				3EDA38162220735500E2C539 /* GoogleService-Info.plist */,
@@ -279,6 +263,7 @@
 				"${PODS_ROOT}/Target Support Files/Pods-Instagram/Pods-Instagram-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -289,6 +274,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
