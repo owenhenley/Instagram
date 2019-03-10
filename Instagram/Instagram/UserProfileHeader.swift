@@ -21,16 +21,14 @@ class UserProfileHeader: UICollectionViewCell {
     }
 
     // MARK: - Controls
-    lazy var statsStackView = UIStackView(arrangedSubviews: [postsLabel,
-                                                             followersLabel,
-                                                             followingLabel
-        ])
-    lazy var toolbarStackView = UIStackView(arrangedSubviews: [gridButton,
-                                                               listButton,
-                                                               bookmarksButton
-        ])
+    private lazy var statsStackView = UIStackView(arrangedSubviews: [postsLabel,
+                                                                     followersLabel,
+                                                                     followingLabel])
+    private lazy var toolbarStackView = UIStackView(arrangedSubviews: [gridButton,
+                                                                       listButton,
+                                                                       bookmarksButton])
     
-    let profileImageView: UIImageView = {
+    private let profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 80 / 2
         imageView.clipsToBounds = true
@@ -38,27 +36,27 @@ class UserProfileHeader: UICollectionViewCell {
     }()
 
     // MARK: Buttons
-    let gridButton: UIButton = {
+    private let gridButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(Icon.Grid, for: .normal)
         return button
     }()
 
-    let listButton: UIButton = {
+    private let listButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(Icon.List, for: .normal)
         button.tintColor = UIColor(white: 0, alpha: 0.2)
         return button
     }()
 
-    let bookmarksButton: UIButton = {
+    private let bookmarksButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(Icon.Ribbon, for: .normal)
         button.tintColor = UIColor(white: 0, alpha: 0.2)
         return button
     }()
 
-    let editProfileButton: UIButton = {
+    private let editProfileButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Edit Profile", for: .normal)
         button.setTitleColor(.black, for: .normal)
@@ -70,13 +68,13 @@ class UserProfileHeader: UICollectionViewCell {
     }()
 
     // MARK: Labels
-    let usernameLabel: UILabel = {
+    private let usernameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 16)
         return label
     }()
 
-    let postsLabel: UILabel = {
+    private let postsLabel: UILabel = {
         let label = UILabel()
         let attributedText = NSMutableAttributedString(string: "77\n",
                                                        attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
@@ -89,7 +87,7 @@ class UserProfileHeader: UICollectionViewCell {
         return label
     }()
 
-    let followersLabel: UILabel = {
+    private let followersLabel: UILabel = {
         let label = UILabel()
         let attributedText = NSMutableAttributedString(string: "77\n",
                                                        attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
@@ -102,10 +100,10 @@ class UserProfileHeader: UICollectionViewCell {
         return label
     }()
 
-    let followingLabel: UILabel = {
+    private let followingLabel: UILabel = {
         let label = UILabel()
         let attributedText = NSMutableAttributedString(string: "77\n",
-                                                        attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+                                                       attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
         attributedText.append(NSAttributedString(string: "following",
                                                  attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray,
                                                               NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)]))
@@ -127,7 +125,7 @@ class UserProfileHeader: UICollectionViewCell {
     }
 
     // MARK: - Methods
-    /// Fetch the users details and display them on screen
+    /// Fetch the users details and display them on screen.
     private func fetchAndSetProfileImage() {
         guard let profileImageUrl = user?.profileImageUrl else { return }
         guard let url = URL(string: profileImageUrl) else { return }
@@ -145,11 +143,11 @@ class UserProfileHeader: UICollectionViewCell {
             DispatchQueue.main.async {
                 self.profileImageView.image = image
             }
-        }.resume()
+            }.resume()
     }
 }
 
-// MARK: - Private layout methods
+// MARK: - Layout methods
 private extension UserProfileHeader {
     func layoutViews() {
         layoutProfileImageView()

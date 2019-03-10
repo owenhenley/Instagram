@@ -82,7 +82,7 @@ class LoginVC: UIViewController {
     }
 
     // MARK: - #selector Methods
-    /// Handles what happens when the user signs in
+    /// Handles what happens when the user signs in.
     @objc private func handleLogin() {
         guard let email = emailTF.text, !email.isEmpty,
             let password = passwordTF.text, !password.isEmpty
@@ -103,7 +103,7 @@ class LoginVC: UIViewController {
     }
 
 
-    /// Handles what happens if the user wants to sign up
+    /// Handles what happens if the user wants to sign up.
     @objc private func handleShowSignUp() {
         let signUpVC = SignUpVC()
         navigationController?.pushViewController(signUpVC, animated: true)
@@ -112,7 +112,7 @@ class LoginVC: UIViewController {
 
 // MARK: - UITextFieldDelegate
 extension LoginVC: UITextFieldDelegate {
-    /// Change Login button interaction based on user input
+    /// Change Login button interaction based on user input.
     @objc private func handleTextDidChange() {
         let formIsValid = emailTF.text != "" &&
             passwordTF.text != ""

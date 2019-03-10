@@ -15,7 +15,15 @@ class PhotoSelectorVC: UICollectionViewController {
     private let cellId = "cellId"
     private let headerId = "headerId"
     private var images = [UIImage]()
-
+    private var selectedImage: UIImage?
+    private var assets = [PHAsset]()
+    private let assetFetchOptions: PHFetchOptions = {
+        let fetchOptions = PHFetchOptions()
+        let sortDescriptor = NSSortDescriptor(key: creationDate, ascending: false)
+        fetchOptions.fetchLimit = 100
+        fetchOptions.sortDescriptors = [sortDescriptor]
+        return fetchOptions
+    }()
     override var prefersStatusBarHidden: Bool {
         return true
     }
@@ -23,15 +31,20 @@ class PhotoSelectorVC: UICollectionViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView?.backgroundColor = .white
+        setupCollectionViewRegister()
         setupNavigationButtons()
-        collectionView.register(PhotoSelectorCell.self, forCellWithReuseIdentifier: cellId)
-        collectionView.register(UICollectionViewCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
         fetchPhotos()
     }
 
     // MARK: - Methods
-    ///
+    /// Sets collection view background to white and registers the header and small image cells.
+    private func setupCollectionViewRegister() {
+        collectionView?.backgroundColor = .white
+        collectionView.register(PhotoSelectorCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.register(PhotoSelectorHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
+    }
+
+    /// Setup the navigation bar's cancel and next buttons.
     private func setupNavigationButtons() {
         navigationController?.navigationBar.tintColor = .black
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel",
@@ -45,43 +58,44 @@ class PhotoSelectorVC: UICollectionViewController {
                                                             action: #selector(handleNext))
     }
 
-    ///
+    /// Handle cancel bar button.
     @objc private func handleCancel() {
         dismiss(animated: true)
     }
 
-    ///
+    /// Handle next bar button.
     @objc private func handleNext() {
-
+        // Implement
     }
 
+    /// Fetch photos from the users camera roll. (make sure `Privacy - Photo Library Usage Description` is setup.
     private func fetchPhotos() {
-        let fetchOptions = PHFetchOptions()
-        let sortDescriptor = NSSortDescriptor(key: creationDate, ascending: false)
-        fetchOptions.fetchLimit = 20
-        fetchOptions.sortDescriptors = [sortDescriptor]
-        
-        let allPhotos = PHAsset.fetchAssets(with: .image, options: fetchOptions)
-        allPhotos.enumerateObjects { (asset, count, stop) in
-            let imageManager = PHImageManager.default()
-            let targetSize = CGSize(width: 350, height: 350)
-            let options = PHImageRequestOptions()
-            options.isSynchronous = true
-            imageManager.requestImage(for: asset,
-                                      targetSize: targetSize,
-                                      contentMode: .aspectFill, options: options, resultHandler: { (image, _) in
-                                        guard let image = image else {
-                                            print("failed to get image data")
-                                            return
-                                        }
+        let allPhotos = PHAsset.fetchAssets(with: .image, options: assetFetchOptions)
+        DispatchQueue.global(qos: .background).async {
+            allPhotos.enumerateObjects { (asset, count, stop) in
+                let imageManager = PHImageManager.default()
+                let targetSize = CGSize(width: 150, height: 150)
+                let options = PHImageRequestOptions()
+                options.isSynchronous = true
+                imageManager.requestImage(for: asset,
+                                          targetSize: targetSize,
+                                          contentMode: .aspectFill, options: options, resultHandler: { (image, _) in
+                                            if let image = image {
+                                                self.images.append(image)
+                                                self.assets.append(asset)
 
-                                        self.images.append(image)
-                                        self.collectionView.reloadData()
+                                                if self.selectedImage == nil {
+                                                    self.selectedImage = image
+                                                }
+                                            }
 
-                                        if count == allPhotos.count - 1 {
-                                            self.collectionView.reloadData()
-                                        }
-            })
+                                            if count == allPhotos.count - 1 {
+                                                DispatchQueue.main.async {
+                                                    self.collectionView.reloadData()
+                                                }
+                                            }
+                })
+            }
         }
     }
 }
@@ -101,12 +115,41 @@ extension PhotoSelectorVC: UICollectionViewDelegateFlowLayout {
         return cell
     }
 
-    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath)
-        header.backgroundColor = .black
-        return header
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.selectedImage = images[indexPath.item]
+        collectionView.reloadData()
     }
 
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
+                                                                           withReuseIdentifier: headerId, for: indexPath) as? PhotoSelectorHeader else {
+                                                                            return UICollectionViewCell()
+        }
+
+        // Low res pre-load
+        header.photoImageView.image = selectedImage
+
+        // Hi-Res version
+        if let selectedImage = selectedImage {
+            if let selectedIndex = self.images.firstIndex(of: selectedImage) {
+                let selectedAsset = self.assets[selectedIndex]
+                let imageManager = PHImageManager.default()
+                let targetSize = CGSize(width: 600, height: 600)
+                imageManager.requestImage(for: selectedAsset,
+                                          targetSize: targetSize,
+                                          contentMode: .aspectFill,
+                                          options: nil) { (image, info) in
+                                            header.photoImageView.image = image
+                                            // Cache image
+                }
+            }
+        }
+        return header
+    }
+}
+
+// MARK: - Setup collection view sizing
+extension PhotoSelectorVC {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         let size = view.frame.width
         return CGSize(width: size, height: size)

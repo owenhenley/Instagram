@@ -1,5 +1,5 @@
 //
-//  PhotoSelectorCell.swift
+//  PhotoSelectorHeader.swift
 //  Instagram
 //
 //  Created by Owen Henley on 10/03/2019.
@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import SnapKit
 
-class PhotoSelectorCell: UICollectionViewCell {
+class PhotoSelectorHeader: UICollectionViewCell {
 
     // MARK: - Properties
     let photoImageView: UIImageView = {
@@ -32,7 +31,7 @@ class PhotoSelectorCell: UICollectionViewCell {
 }
 
 // MARK: - Layout view elements
-private extension PhotoSelectorCell {
+private extension PhotoSelectorHeader {
     func layoutPhotoImageView() {
         addSubview(photoImageView)
         photoImageView.snp.makeConstraints { (make) in

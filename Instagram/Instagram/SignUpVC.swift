@@ -62,7 +62,7 @@ class SignUpVC: UIViewController {
         return signUpButton
     }()
 
-    let alreadyHaveAccountButton: UIButton = {
+    private let alreadyHaveAccountButton: UIButton = {
         let button = UIButton(type: .system)
         let attributedTitle = NSMutableAttributedString(string: "Already have an account? ",
                                                         attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14),
@@ -90,6 +90,7 @@ class SignUpVC: UIViewController {
         navigationController?.popViewController(animated: true)
     }
 
+    /// Signs up user with inputed informaion from the textfields.
     @objc private func handleSignUp() {
         guard let email = emailTF.text, email != "",
             let username = usernameTF.text, username != "",
@@ -153,6 +154,7 @@ extension SignUpVC: UIGestureRecognizerDelegate {
 
 // MARK: - UITextFieldDelegate
 extension SignUpVC: UITextFieldDelegate {
+    /// Change Sign Up button interaction based on user input.
     @objc private func handleTextDidChange() {
         let formIsValid = emailTF.text != "" &&
             usernameTF.text != "" &&
@@ -170,6 +172,7 @@ extension SignUpVC: UITextFieldDelegate {
 
 // MARK: - UIImagePickerControllerDelegate
 extension SignUpVC: UIImagePickerControllerDelegate {
+    /// Allows user to add a profile image. Makse sure `Privacy - Photo Library Additions Usage Description` is setup.
     @objc private func handleAddPhoto() {
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self

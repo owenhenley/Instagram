@@ -25,7 +25,7 @@ class UserProfileVC: UICollectionViewController {
     }
 
     // MARK: - Methods
-    /// Fetches username and sets navigation title as the username
+    /// Fetches username and sets navigation title as the username.
     private func fetchAndDisplayUser() {
         guard let uid = uid else { return }
         dbRef.child(dict.users).child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -42,12 +42,12 @@ class UserProfileVC: UICollectionViewController {
         }
     }
 
-    /// Sets up the Log Out Button
+    /// Sets up the Log Out Button.
     private func setupLogOutButton() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: Icon.Settings, style: .plain, target: self, action: #selector(handleLogOut))
     }
 
-    /// Handles what happnens when the user taps to sign out
+    /// Handles what happnens when the user taps to sign out.
     @objc private func handleLogOut() {
         let alert = UIAlertController(title: "Are you sure you want to log out?", message: nil, preferredStyle: .actionSheet)
         let logOutAction = UIAlertAction(title: "Log Out", style: .destructive, handler: { (_) in

@@ -1,15 +1,15 @@
+// //
+// //  FirebaseManager.swift
+// //  Instagram
+// //
+// //  Created by Owen Henley on 2/24/19.
+// //  Copyright © 2019 Owen Henley. All rights reserved.
+// //
 //
-//  FirebaseManager.swift
-//  Instagram
+// import UIKit
+// import Firebase
+// import SVProgressHUD
 //
-//  Created by Owen Henley on 2/24/19.
-//  Copyright © 2019 Owen Henley. All rights reserved.
+// class FirebaseManager {
 //
-
-import UIKit
-import Firebase
-import SVProgressHUD
-
-class FirebaseManager {
-    
-}
+// }

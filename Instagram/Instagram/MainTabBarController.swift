@@ -19,7 +19,8 @@ class MainTabBarController: UITabBarController {
         setupViewControllers()
     }
 
-    /// Checks if the user is currently signed in
+    // MARK: - Methods
+    /// Checks if the user is currently signed in.
     private func checkUserAuthState() {
         if currentUser == nil {
             DispatchQueue.main.async {
@@ -31,8 +32,7 @@ class MainTabBarController: UITabBarController {
         }
     }
 
-    /// Sets up the TabBar with associated view controllers
-    /// and lays out the correct icons
+    /// Sets up the TabBar with associated view controllers and lays out the correct icons.
     func setupViewControllers() {
         // Home
         let homeVC = addNavController(unselectedIcon: TabBarIcon.HomeUnselected,
@@ -66,10 +66,10 @@ class MainTabBarController: UITabBarController {
     /// Adds a rootViewController to a navigationController with it's unselected and selected tab bar icons.
     ///
     /// - Parameters:
-    ///   - unselectedIcon: The unselected tabBar icon
-    ///   - selectedIcon?: The selected tabBar icon
-    ///   - rootViewController: The view controller to set as the root
-    /// - Returns: a new `UINavigationController`, to be passed into the tabBar's `viewControllers` array
+    ///   - unselectedIcon: The unselected tabBar icon.
+    ///   - selectedIcon?: The selected tabBar icon.
+    ///   - rootViewController: The view controller to set as the root.
+    /// - Returns: a new `UINavigationController`, to be passed into the tabBar's `viewControllers` array.
     private func addNavController(unselectedIcon: UIImage, selectedIcon: UIImage?, rootViewController: UIViewController = UIViewController()) -> UINavigationController {
         let viewController = rootViewController
         let navController = UINavigationController(rootViewController: viewController)
@@ -78,7 +78,7 @@ class MainTabBarController: UITabBarController {
         return navController
     }
 
-    /// Centers the TabBar's veritcal alignment
+    /// Centers the TabBar's veritcal alignment.
     private func customiseTabBarInsets() {
         guard let items = tabBar.items else { return }
 
