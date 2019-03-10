@@ -24,5 +24,7 @@ struct dict {
    static let profileImageUrl = "profileImageUrl"
 }
 
+let creationDate = "creationDate"
+
 // Dependencies
 let mainTabBarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController
