@@ -16,6 +16,7 @@ class PhotoSelectorVC: UICollectionViewController {
     private let headerId = "headerId"
     private var images = [UIImage]()
     private var selectedImage: UIImage?
+    private var headerImage: PhotoSelectorHeader?
     private var assets = [PHAsset]()
     private let assetFetchOptions: PHFetchOptions = {
         let fetchOptions = PHFetchOptions()
@@ -47,6 +48,7 @@ class PhotoSelectorVC: UICollectionViewController {
     /// Setup the navigation bar's cancel and next buttons.
     private func setupNavigationButtons() {
         navigationController?.navigationBar.tintColor = .black
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel",
                                                            style: .plain,
                                                            target: self,
@@ -65,10 +67,12 @@ class PhotoSelectorVC: UICollectionViewController {
 
     /// Handle next bar button.
     @objc private func handleNext() {
-        // Implement
+        let sharePhotoVC = SharePhotoVC()
+        sharePhotoVC.selectedImage = headerImage?.photoImageView.image
+        navigationController?.pushViewController(sharePhotoVC, animated: true)
     }
 
-    /// Fetch photos from the users camera roll. (make sure `Privacy - Photo Library Usage Description` is setup.
+    /// Fetch photos from the users camera roll. (make sure `Privacy - Photo Library Usage Description` is setup.)
     private func fetchPhotos() {
         let allPhotos = PHAsset.fetchAssets(with: .image, options: assetFetchOptions)
         DispatchQueue.global(qos: .background).async {
@@ -118,6 +122,9 @@ extension PhotoSelectorVC: UICollectionViewDelegateFlowLayout {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.selectedImage = images[indexPath.item]
         collectionView.reloadData()
+
+        let indexPath = IndexPath(item: 0, section: 0)
+        collectionView.scrollToItem(at: indexPath, at: .bottom, animated: true)
     }
 
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -127,6 +134,7 @@ extension PhotoSelectorVC: UICollectionViewDelegateFlowLayout {
         }
 
         // Low res pre-load
+        headerImage = header
         header.photoImageView.image = selectedImage
 
         // Hi-Res version
@@ -140,7 +148,8 @@ extension PhotoSelectorVC: UICollectionViewDelegateFlowLayout {
                                           contentMode: .aspectFill,
                                           options: nil) { (image, info) in
                                             header.photoImageView.image = image
-                                            // Cache image
+                                            // TODO: - Cache image
+                                            // TODO: - Can't seem to detet RAW images
                 }
             }
         }
