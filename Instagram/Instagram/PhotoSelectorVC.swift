@@ -22,6 +22,7 @@ class PhotoSelectorVC: UICollectionViewController {
         let fetchOptions = PHFetchOptions()
         let sortDescriptor = NSSortDescriptor(key: creationDate, ascending: false)
         fetchOptions.fetchLimit = 100
+        fetchOptions.includeAssetSourceTypes = .typeUserLibrary
         fetchOptions.sortDescriptors = [sortDescriptor]
         return fetchOptions
     }()
@@ -41,19 +42,24 @@ class PhotoSelectorVC: UICollectionViewController {
     /// Sets collection view background to white and registers the header and small image cells.
     private func setupCollectionViewRegister() {
         collectionView?.backgroundColor = .white
-        collectionView.register(PhotoSelectorCell.self, forCellWithReuseIdentifier: cellId)
-        collectionView.register(PhotoSelectorHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
+        collectionView.register(PhotoSelectorCell.self,
+                                forCellWithReuseIdentifier: cellId)
+        collectionView.register(PhotoSelectorHeader.self,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                withReuseIdentifier: headerId)
     }
 
     /// Setup the navigation bar's cancel and next buttons.
     private func setupNavigationButtons() {
         navigationController?.navigationBar.tintColor = .black
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "",
+                                                           style: .plain,
+                                                           target: nil,
+                                                           action: nil)
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel",
                                                            style: .plain,
                                                            target: self,
                                                            action: #selector(handleCancel))
-
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Next",
                                                             style: .plain,
                                                             target: self,
@@ -105,7 +111,7 @@ class PhotoSelectorVC: UICollectionViewController {
 }
 
 // MARK: - Setup Collection View
-extension PhotoSelectorVC: UICollectionViewDelegateFlowLayout {
+extension PhotoSelectorVC {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return images.count
     }
@@ -129,8 +135,10 @@ extension PhotoSelectorVC: UICollectionViewDelegateFlowLayout {
 
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
-                                                                           withReuseIdentifier: headerId, for: indexPath) as? PhotoSelectorHeader else {
-                                                                            return UICollectionViewCell()
+                                                                           withReuseIdentifier: headerId,
+                                                                           for: indexPath) as? PhotoSelectorHeader
+            else {
+                return UICollectionViewCell()
         }
 
         // Low res pre-load
@@ -148,8 +156,8 @@ extension PhotoSelectorVC: UICollectionViewDelegateFlowLayout {
                                           contentMode: .aspectFill,
                                           options: nil) { (image, info) in
                                             header.photoImageView.image = image
-                                            // TODO: - Cache image
-                                            // TODO: - Can't seem to detet RAW images
+                                            // FIXME: - Cache image
+                                            // FIXME: - Can't seem to detet RAW images
                 }
             }
         }
@@ -157,8 +165,8 @@ extension PhotoSelectorVC: UICollectionViewDelegateFlowLayout {
     }
 }
 
-// MARK: - Setup collection view sizing
-extension PhotoSelectorVC {
+// MARK: - UICollectionViewDelegateFlowLayout, Setup CollectionView sizing
+extension PhotoSelectorVC: UICollectionViewDelegateFlowLayout  {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         let size = view.frame.width
         return CGSize(width: size, height: size)
