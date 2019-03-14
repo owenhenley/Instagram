@@ -8,6 +8,8 @@
 
 import UIKit
 import SnapKit
+import Firebase
+import SVProgressHUD
 
 class SharePhotoVC: UIViewController {
 
@@ -42,8 +44,87 @@ class SharePhotoVC: UIViewController {
 
     /// Control the share button action
     @objc private func handleShare() {
+        SVProgressHUD.show()
+        navigationItem.rightBarButtonItem?.isEnabled = false
+        guard let image = selectedImage,
+            let caption = textView.text,
+            !caption.isEmpty else {
+                return
+        }
+
+        guard let uploadData = image.jpegData(compressionQuality: 5) else {
+            return
+        }
+
+        let filename = NSUUID().uuidString
+        let storage = storageRef.child(dict.posts).child(filename)
+        storage.putData(uploadData, metadata: nil) { (metadata, error) in
+            if let error = error {
+                print("Error in File: \(#file), Function: \(#function), Line: \(#line), Message: \(error). \(error.localizedDescription)")
+                self.navigationItem.rightBarButtonItem?.isEnabled = true
+                SVProgressHUD.dismiss()
+                return
+            }
+
+            storage.downloadURL(completion: { (downloadURL, error) in
+                if let error = error {
+                    print("Error in File: \(#file), Function: \(#function), Line: \(#line), Message: \(error). \(error.localizedDescription)")
+                    self.navigationItem.rightBarButtonItem?.isEnabled = true
+                    SVProgressHUD.dismiss()
+                    return
+                }
+
+                guard let imageURL = downloadURL?.absoluteString else { return }
+
+                print("Successfully uploaded post image:", imageURL)
+
+                self.saveToDatabaseWithImageUrl(imageURL)
+                self.dismiss(animated: true)
+            })
+        }
+
         print("sharing")
         dismissKeyboard()
+    }
+
+    private func saveToDatabaseWithImageUrl(_ imageUrl: String) {
+        guard let uid = uid else {
+            self.navigationItem.rightBarButtonItem?.isEnabled = true
+            SVProgressHUD.dismiss()
+            return
+        }
+
+        guard let postImage = selectedImage,
+            let caption = textView.text
+            else {
+                self.navigationItem.rightBarButtonItem?.isEnabled = true
+                SVProgressHUD.dismiss()
+                return
+        }
+
+        let userPostRef = dbRef.child(dict.posts).child(uid)
+        let autoId = userPostRef.childByAutoId()
+
+        let values = [
+            dict.imageUrl : imageUrl,
+            dict.caption : caption,
+            dict.imageWidth : postImage.size.width,
+            dict.imageHeight : postImage.size.height,
+            dict.creationDate : Date().timeIntervalSince1970
+            ] as [String : Any]
+
+        autoId.updateChildValues(values) { (error, dbRef) in
+            if let error = error {
+                print("Error in File: \(#file), Function: \(#function), Line: \(#line), Message: \(error). \(error.localizedDescription)")
+                self.navigationItem.rightBarButtonItem?.isEnabled = true
+                SVProgressHUD.dismiss()
+                return
+            }
+            print("successfullt saved post to DB")
+            self.navigationItem.rightBarButtonItem?.isEnabled = true
+            SVProgressHUD.dismiss()
+        }
+
     }
 }
 
