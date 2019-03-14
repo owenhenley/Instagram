@@ -13,6 +13,7 @@ class UserProfileVC: UICollectionViewController {
 
     // MARK: - Properties
     private var user: User?
+    private var posts = [Post]()
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -22,6 +23,7 @@ class UserProfileVC: UICollectionViewController {
         fetchAndDisplayUser()
         setupCollectionViewCells()
         setupLogOutButton()
+        fetchPosts()
     }
 
     // MARK: - Methods
@@ -37,6 +39,32 @@ class UserProfileVC: UICollectionViewController {
 
             self.navigationItem.title = self.user?.username
             self.collectionView.reloadData()
+        }) { (error) in
+            print("Error in File: \(#file), Function: \(#function), Line: \(#line), Message: \(error). \(error.localizedDescription)")
+        }
+    }
+
+    private func fetchPosts() {
+        guard let uid = uid else {
+            return
+        }
+
+        dbRef.child(dict.posts).child(uid).observe(.value, with: { (snapshot) in
+            guard let dictionaries = snapshot.value as? [String : Any] else {
+                return
+            }
+
+            dictionaries.forEach({ (key, value) in
+                guard let dictionary = value as? [String : Any] else {
+                    return
+                }
+
+                let post = Post(dictionary: dictionary)
+                self.posts.append(post)
+            })
+
+            self.collectionView.reloadData()
+
         }) { (error) in
             print("Error in File: \(#file), Function: \(#function), Line: \(#line), Message: \(error). \(error.localizedDescription)")
         }
@@ -77,12 +105,12 @@ extension UserProfileVC {
         collectionView.register(UserProfileHeader.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                 withReuseIdentifier: "headerId")
-        collectionView.register(UICollectionViewCell.self,
+        collectionView.register(UserProfilePhotoCell.self,
                                 forCellWithReuseIdentifier: "cellId")
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 19
+        return posts.count
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -91,8 +119,12 @@ extension UserProfileVC {
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath)
-        cell.backgroundColor = .red
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as? UserProfilePhotoCell else {
+            return UICollectionViewCell()
+        }
+
+        cell.post = posts[indexPath.item]
+
         return cell
     }
 
