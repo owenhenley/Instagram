@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import SVProgressHUD
 
 class UserProfileVC: UICollectionViewController {
 
@@ -23,17 +24,20 @@ class UserProfileVC: UICollectionViewController {
         fetchAndDisplayUser()
         setupCollectionViewCells()
         setupLogOutButton()
-        fetchPosts()
+        fetchOrderedPosts()
     }
 
     // MARK: - Methods
     /// Fetches username and sets navigation title as the username.
     private func fetchAndDisplayUser() {
+        SVProgressHUD.show()
         guard let uid = uid else { return }
-        dbRef.child(dict.users).child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+        dbRef.child(dict.users).child(uid).queryOrdered(byChild: dict.creationDate).observeSingleEvent(of: .value, with: { (snapshot) in
             print(snapshot.value ?? "No Value")
 
-            guard let dictionary = snapshot.value as? [String : Any] else { return }
+            guard let dictionary = snapshot.value as? [String : Any] else {
+                return
+            }
 
             self.user = User(dictionary: dictionary)
 
@@ -44,12 +48,34 @@ class UserProfileVC: UICollectionViewController {
         }
     }
 
+    /// Fetch the current users posts in creation date order
+    private func fetchOrderedPosts() {
+        guard let uid = uid else {
+            return
+        }
+
+        dbRef.child(dict.posts).child(uid).observe(.childAdded, with: { (snapshot) in
+            guard let dictionary = snapshot.value as? [String : Any] else {
+                return
+            }
+
+            let post = Post(dictionary: dictionary)
+            self.posts.append(post)
+
+            self.collectionView.reloadData()
+        }) { (error) in
+            print("Error in File: \(#file), Function: \(#function), Line: \(#line), Message: \(error). \(error.localizedDescription)")
+            return
+        }
+    }
+
+    /// Fetch the current users posts in no particular order
     private func fetchPosts() {
         guard let uid = uid else {
             return
         }
 
-        dbRef.child(dict.posts).child(uid).observe(.value, with: { (snapshot) in
+        dbRef.child(dict.posts).child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
             guard let dictionaries = snapshot.value as? [String : Any] else {
                 return
             }

@@ -87,6 +87,9 @@ class SharePhotoVC: UIViewController {
         dismissKeyboard()
     }
 
+    /// Save the imageURL to the firebase database
+    ///
+    /// - Parameter imageUrl: The url of the shared image
     private func saveToDatabaseWithImageUrl(_ imageUrl: String) {
         guard let uid = uid else {
             self.navigationItem.rightBarButtonItem?.isEnabled = true

@@ -15,7 +15,11 @@ class UserProfileHeader: UICollectionViewCell {
     // MARK: - Properties
     var user: User? {
         didSet {
-            fetchAndSetProfileImage()
+            guard let profileImageUrl = user?.profileImageUrl else {
+                return
+            }
+
+            profileImageView.loadImage(from: profileImageUrl)
             usernameLabel.text = user?.username
         }
     }
@@ -28,12 +32,7 @@ class UserProfileHeader: UICollectionViewCell {
                                                                        listButton,
                                                                        bookmarksButton])
     
-    private let profileImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.layer.cornerRadius = 80 / 2
-        imageView.clipsToBounds = true
-        return imageView
-    }()
+    private let profileImageView = CustomImageView()
 
     // MARK: Buttons
     private let gridButton: UIButton = {
@@ -68,11 +67,7 @@ class UserProfileHeader: UICollectionViewCell {
     }()
 
     // MARK: Labels
-    private let usernameLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 16)
-        return label
-    }()
+    private let usernameLabel = UILabel()
 
     private let postsLabel: UILabel = {
         let label = UILabel()
@@ -123,28 +118,6 @@ class UserProfileHeader: UICollectionViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    // MARK: - Methods
-    /// Fetch the users details and display them on screen.
-    private func fetchAndSetProfileImage() {
-        guard let profileImageUrl = user?.profileImageUrl else { return }
-        guard let url = URL(string: profileImageUrl) else { return }
-
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if let error = error {
-                print("Error in File: \(#file), Function: \(#function), Line: \(#line), Message: \(error). \(error.localizedDescription)")
-                return
-            }
-
-            guard let data = data else { return }
-
-            let image = UIImage(data: data)
-
-            DispatchQueue.main.async {
-                self.profileImageView.image = image
-            }
-            }.resume()
-    }
 }
 
 // MARK: - Layout methods
@@ -158,6 +131,8 @@ private extension UserProfileHeader {
     }
 
     func layoutProfileImageView() {
+        profileImageView.layer.cornerRadius = 80 / 2
+        profileImageView.clipsToBounds = true
         addSubview(profileImageView)
         profileImageView.snp.makeConstraints { (make) in
             make.top.equalToSuperview().inset(12)
@@ -167,6 +142,7 @@ private extension UserProfileHeader {
     }
 
     func layoutUsernameLabel() {
+        usernameLabel.font = UIFont.boldSystemFont(ofSize: 16)
         addSubview(usernameLabel)
         usernameLabel.snp.makeConstraints { (make) in
             make.left.equalToSuperview().inset(20)
