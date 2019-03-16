@@ -36,8 +36,8 @@ class MainTabBarController: UITabBarController {
     func setupViewControllers() {
         // Home
         let homeVC = addNavController(unselectedIcon: TabBarIcon.HomeUnselected,
-                                      selectedIcon: TabBarIcon.HomeSelected)
-
+                                      selectedIcon: TabBarIcon.HomeSelected,
+                                      rootViewController: HomeFeedVC(collectionViewLayout: UICollectionViewFlowLayout()))
         // Search
         let searchVC = addNavController(unselectedIcon: TabBarIcon.SearchUnselected,
                                         selectedIcon: TabBarIcon.SearchSelected)
@@ -47,7 +47,6 @@ class MainTabBarController: UITabBarController {
         // Likes
         let likesVC = addNavController(unselectedIcon: TabBarIcon.HeartUnselected,
                                         selectedIcon: TabBarIcon.HeartSelected)
-
         // User Profile
         let userProfileVC = addNavController(unselectedIcon: TabBarIcon.ProfileUnselected,
                                              selectedIcon: TabBarIcon.ProfileSelected,

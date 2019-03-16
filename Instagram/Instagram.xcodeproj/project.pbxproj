@@ -17,6 +17,8 @@
 		3E8867A4223AF3E7001A767F /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8867A3223AF3E7001A767F /* Post.swift */; };
 		3E8867A6223AF63B001A767F /* UserProfilePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8867A5223AF63B001A767F /* UserProfilePhotoCell.swift */; };
 		3E8867A8223AFD3E001A767F /* CusomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8867A7223AFD3E001A767F /* CusomImageView.swift */; };
+		3E8867AA223D4F60001A767F /* HomeFeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8867A9223D4F60001A767F /* HomeFeedVC.swift */; };
+		3E8867AC223D50C3001A767F /* HomeFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8867AB223D50C3001A767F /* HomeFeedCell.swift */; };
 		3EA837032221D6A300F93BF2 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA837022221D6A300F93BF2 /* MainTabBarController.swift */; };
 		3EA837052221D78E00F93BF2 /* UserProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA837042221D78E00F93BF2 /* UserProfileVC.swift */; };
 		3EA837072221D9D600F93BF2 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA837062221D9D600F93BF2 /* Icons.swift */; };
@@ -47,6 +49,8 @@
 		3E8867A3223AF3E7001A767F /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		3E8867A5223AF63B001A767F /* UserProfilePhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfilePhotoCell.swift; sourceTree = "<group>"; };
 		3E8867A7223AFD3E001A767F /* CusomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CusomImageView.swift; sourceTree = "<group>"; };
+		3E8867A9223D4F60001A767F /* HomeFeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedVC.swift; sourceTree = "<group>"; };
+		3E8867AB223D50C3001A767F /* HomeFeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedCell.swift; sourceTree = "<group>"; };
 		3EA837022221D6A300F93BF2 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		3EA837042221D78E00F93BF2 /* UserProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileVC.swift; sourceTree = "<group>"; };
 		3EA837062221D9D600F93BF2 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
@@ -130,12 +134,13 @@
 		3E820E3A221CA51D008124DB /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				3EE318D2221DD55100FEBB2C /* SignUpVC.swift */,
 				3EA837022221D6A300F93BF2 /* MainTabBarController.swift */,
+				3EE318D2221DD55100FEBB2C /* SignUpVC.swift */,
 				3EA837042221D78E00F93BF2 /* UserProfileVC.swift */,
 				3EDE5E832225E01B001259F7 /* LoginVC.swift */,
 				3E40ACFE22354FB5003AD989 /* PhotoSelectorVC.swift */,
 				3EAC21AD223854D600BF5D7A /* SharePhotoVC.swift */,
+				3E8867A9223D4F60001A767F /* HomeFeedVC.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -148,6 +153,7 @@
 				3EBB8AF8223589C60041F6DB /* PhotoSelectorCell.swift */,
 				3EBB8AFA223597120041F6DB /* PhotoSelectorHeader.swift */,
 				3E8867A5223AF63B001A767F /* UserProfilePhotoCell.swift */,
+				3E8867AB223D50C3001A767F /* HomeFeedCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -340,6 +346,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E8867AC223D50C3001A767F /* HomeFeedCell.swift in Sources */,
 				3EDE5E842225E01B001259F7 /* LoginVC.swift in Sources */,
 				3EA837072221D9D600F93BF2 /* Icons.swift in Sources */,
 				3EB9C6872238625F001C8773 /* UIViewController+Ext.swift in Sources */,
@@ -350,6 +357,7 @@
 				3E74B5972223136900C8CC24 /* UserProfileHeader.swift in Sources */,
 				3EA837032221D6A300F93BF2 /* MainTabBarController.swift in Sources */,
 				3EE318D3221DD55100FEBB2C /* SignUpVC.swift in Sources */,
+				3E8867AA223D4F60001A767F /* HomeFeedVC.swift in Sources */,
 				3EBB8AFD22359F3E0041F6DB /* ImageSelectionManager.swift in Sources */,
 				3E820E44221CA51D008124DB /* AppDelegate.swift in Sources */,
 				3E8867A8223AFD3E001A767F /* CusomImageView.swift in Sources */,

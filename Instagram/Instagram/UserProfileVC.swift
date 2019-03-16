@@ -32,8 +32,7 @@ class UserProfileVC: UICollectionViewController {
     private func fetchAndDisplayUser() {
         SVProgressHUD.show()
         guard let uid = uid else { return }
-        dbRef.child(dict.users).child(uid).queryOrdered(byChild: dict.creationDate).observeSingleEvent(of: .value, with: { (snapshot) in
-            print(snapshot.value ?? "No Value")
+        dbRef.child(dict.users).child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
 
             guard let dictionary = snapshot.value as? [String : Any] else {
                 return
@@ -54,7 +53,7 @@ class UserProfileVC: UICollectionViewController {
             return
         }
 
-        dbRef.child(dict.posts).child(uid).observe(.childAdded, with: { (snapshot) in
+        dbRef.child(dict.posts).child(uid).queryOrdered(byChild: dict.creationDate).observe(.childAdded, with: { (snapshot) in
             guard let dictionary = snapshot.value as? [String : Any] else {
                 return
             }

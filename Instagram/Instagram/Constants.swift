@@ -36,3 +36,6 @@ let creationDate = "creationDate"
 
 // Dependencies
 let mainTabBarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController
+
+// Fetching
+var imageCache = [String : UIImage]()

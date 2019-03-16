@@ -13,9 +13,16 @@ class CustomImageView: UIImageView {
 
     var lastUrlUsedToLoadImage: String?
 
+    /// <#Description#>
+    ///
+    /// - Parameter urlString: <#urlString description#>
     func loadImage(from urlString: String) {
-
         lastUrlUsedToLoadImage = urlString
+
+        if let cachedImage = imageCache[urlString] {
+            self.image = cachedImage
+            return
+        }
 
         guard let url = URL(string: urlString) else {
             return
@@ -40,10 +47,12 @@ class CustomImageView: UIImageView {
 
             let image = UIImage(data: imageData)
 
+            imageCache[url.absoluteString] = image
+
             DispatchQueue.main.async {
                 self.image = image
             }
-            }.resume()
+        }.resume()
         SVProgressHUD.dismiss()
     }
 }
