@@ -23,6 +23,7 @@ struct Icon {
     static let Save = UIImage(named: "save")!
     static let Send = UIImage(named: "send")!
     static let Settings = UIImage(named: "settings")!
+    static let Like = UIImage(named: "heart_unselected")!
 }
 
 struct TabBarIcon {

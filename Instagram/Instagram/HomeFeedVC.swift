@@ -54,6 +54,7 @@ class HomeFeedVC: UICollectionViewController {
     }
 }
 
+// MARK: - Layout Collection View
 extension HomeFeedVC: UICollectionViewDelegateFlowLayout {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return posts.count
@@ -71,11 +72,15 @@ extension HomeFeedVC: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = view.frame.width
-        let height = CGFloat(400)
+        var height: CGFloat = 40 + 8 + 8 // Profile image height, plus two 8pt insets
+        height += view.frame.width
+        height += 60 // Social buttons
+        height += 100 // Caption
         return CGSize(width: width, height: height)
     }
 }
 
+// MARK: - Setup Methods
 private extension HomeFeedVC {
     func setupViews() {
         setupNavigationItems()
@@ -83,6 +88,6 @@ private extension HomeFeedVC {
     }
 
     func setupNavigationItems() {
-        navigationItem.titleView = UIImageView(image: Icon.LogoBlack)
+        navigationItem.title = "Feed"
     }
 }
